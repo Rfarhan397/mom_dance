@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "17975810347",
+    "project_id": "mom-dance-72992",
+    "storage_bucket": "mom-dance-72992.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17975810347:android:08d64fd9dec6d55b700d6e",
+        "android_client_info": {
+          "package_name": "com.solinovation.mom_dance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu4XgqSkOShP2jBDApuUn0_ADf-huaRqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
