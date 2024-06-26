@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mom_dance/db_key.dart';
+import 'package:mom_dance/model/constumeChecklist/costume_checklist_model.dart';
+import 'package:mom_dance/model/danceShoes/dance_shoes_model.dart';
 import 'package:mom_dance/model/dancer/dancer_model.dart';
+import 'package:mom_dance/model/skillGoal/skill_goal_model.dart';
 import 'package:mom_dance/services/dancer/dancer_services.dart';
 
 import '../../constant.dart';
@@ -43,6 +46,33 @@ class DancerProvider with ChangeNotifier {
     return firestore.collection(DbKey.c_dancers).doc(dancerID).collection(DbKey.c_compJournal).snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
         return CompJournalModel.fromMap(doc.data());
+      }).toList();
+    });
+  }
+
+  Stream<List<DanceShoesModel>> getDanceShoes({required String dancerID}) {
+    String? userUID = auth.currentUser?.uid.toString();
+    return firestore.collection(DbKey.c_dancers).doc(dancerID).collection(DbKey.c_danceShoes).snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return DanceShoesModel.fromMap(doc.data());
+      }).toList();
+    });
+  }
+
+  Stream<List<SkillGoalModel>> getSkillGoals({required String dancerID}) {
+    String? userUID = auth.currentUser?.uid.toString();
+    return firestore.collection(DbKey.c_dancers).doc(dancerID).collection(DbKey.c_skillGoals).snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return SkillGoalModel.fromMap(doc.data());
+      }).toList();
+    });
+  }
+
+  Stream<List<CostumeChecklistModel>> getCostumeChecklist({required String dancerID}) {
+    String? userUID = auth.currentUser?.uid.toString();
+    return firestore.collection(DbKey.c_dancers).doc(dancerID).collection(DbKey.c_costumeChecklist).snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return CostumeChecklistModel.fromMap(doc.data());
       }).toList();
     });
   }

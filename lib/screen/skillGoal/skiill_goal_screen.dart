@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mom_dance/bottomSheet/comp/comp_bottom_sheet.dart';
+import 'package:mom_dance/bottomSheet/skillGoal/skill_goal_bottom_sheet.dart';
 import 'package:mom_dance/helper/simple_header.dart';
 import 'package:mom_dance/helper/text_widget.dart';
 import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
+import 'package:mom_dance/model/skillGoal/skill_goal_model.dart';
 import 'package:mom_dance/res/appAsset/app_assets.dart';
 import 'package:mom_dance/res/appIcon/app_icons.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +15,8 @@ import 'package:provider/provider.dart';
 import '../../constant.dart';
 import '../../provider/dancer/dancer_provider.dart';
 
-class CompJournalScreen extends StatelessWidget {
-   CompJournalScreen({super.key});
+class SkiillGoalScreen extends StatelessWidget {
+  SkiillGoalScreen({super.key});
 
   var dateController = TextEditingController();
 
@@ -28,13 +30,13 @@ class CompJournalScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Comp Journal"),
+              SimpleHeader(text: "Skill Goal"),
               Container(
                width: Get.width,
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.comp_journal,fit: BoxFit.cover,),
+                  child: Image.asset(AppAssets.skill_goal,fit: BoxFit.cover,),
                 ),
               ),
               SizedBox(height: 20.0,),
@@ -56,45 +58,21 @@ class CompJournalScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Date", size: 12.0,color: Colors.white,))),
+                          child: Center(child: TextWidget(text: "Skill", size: 12.0,color: Colors.white,))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Comp", size: 12.0,color: Colors.white))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Dance", size: 12.0,color: Colors.white))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Adjuction",color: Colors.white, size: 12.0,maxLine: 1 ,))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Overall", color: Colors.white,size: 12.0))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Special",color: Colors.white, size: 12.0))),
+                          child: Center(child: TextWidget(text: "Date Mastered", size: 12.0,color: Colors.white))),
                     ]
                   )
                 ],
               ),
               Consumer<DancerProvider>(
                 builder: (context, productProvider, child) {
-                  return StreamBuilder<List<CompJournalModel>>(
-                    stream: productProvider.getCompJournal(dancerID: arguments['id'] ?? ""),
+                  return StreamBuilder<List<SkillGoalModel>>(
+                    stream: productProvider.getSkillGoals(dancerID: arguments['id'] ?? ""),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(child: CircularProgressIndicator());
@@ -103,16 +81,16 @@ class CompJournalScreen extends StatelessWidget {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No Comp Journal found'));
+                        return Center(child: Text('No skill goals found'));
                       }
 
-                      List<CompJournalModel> compJournal = snapshot.data!;
+                      List<SkillGoalModel> skillGoals = snapshot.data!;
                       return ListView.builder(
-                        itemCount: compJournal.length,
+                        itemCount: skillGoals.length,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                         CompJournalModel model = compJournal[index];
+                         SkillGoalModel model = skillGoals[index];
                          log("message${model.date}");
                           return  Table(
                             border: TableBorder.all(width: 1.0,color: Colors.black),
@@ -129,22 +107,10 @@ class CompJournalScreen extends StatelessWidget {
                                   children: [
                                     Container(
                                         padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.date, size: 10.0,color: Colors.black,))),
+                                        child: Center(child: TextWidget(text: model.skill, size: 12.0,color: Colors.black,))),
                                     Container(
                                         padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.comp, size: 10.0,color: Colors.black))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.dance, size: 10.0,color: Colors.black))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.adjuction,color: Colors.black, size: 10.0))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.overAll, color: Colors.black,size: 10.0))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.special,color: Colors.black, size: 10.0))),
+                                        child: Center(child: TextWidget(text: model.date, size: 12.0,color: Colors.black))),
                                   ]
                               )
                             ],
@@ -162,7 +128,7 @@ class CompJournalScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.bottomSheet(CompBottomSheet(id: arguments['id'] ?? "null",));
+          Get.bottomSheet(SkillGoalBottomSheet(id: arguments['id'] ?? "null",));
         },
         tooltip: 'Increment',
         backgroundColor: primaryColor,

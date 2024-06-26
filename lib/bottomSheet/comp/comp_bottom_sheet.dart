@@ -6,11 +6,11 @@ import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:provider/provider.dart';
 
-import '../constant.dart';
-import '../helper/custom_textfield.dart';
-import '../helper/simple_button_widget.dart';
-import '../helper/text_widget.dart';
-import '../provider/constant/value_provider.dart';
+import '../../constant.dart';
+import '../../helper/custom_textfield.dart';
+import '../../helper/simple_button_widget.dart';
+import '../../helper/text_widget.dart';
+import '../../provider/constant/value_provider.dart';
 class CompBottomSheet extends StatelessWidget {
   final String id;
    CompBottomSheet({super.key, required this.id});

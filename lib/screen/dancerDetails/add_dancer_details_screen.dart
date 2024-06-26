@@ -52,7 +52,12 @@ class AddDancerDetailsScreen extends StatelessWidget {
                  CompJournalCard(
                    image: AppAssets.costume_checklist,
                    title: 'Costume Checklist',
-                   press: () {  },
+                   press: () {
+                     log("Id: ${dancer.id}");
+                     Get.toNamed(RoutesName.costumeChecklist,arguments: {
+                       "id" : dancer.id
+                     });
+                   },
                  ),
                ],
              ),
@@ -63,12 +68,21 @@ class AddDancerDetailsScreen extends StatelessWidget {
                   CompJournalCard(
                     image: AppAssets.skill_goal,
                     title: 'Skill Goals',
-                    press: () {  },
+                    press: () {
+                      Get.toNamed(RoutesName.skillGoalScreen,arguments: {
+                        "id" : dancer.id
+                      });
+                    },
                   ),
                   CompJournalCard(
                     image: AppAssets.costume_measurement,
-                    title: 'Costume Checklist',
-                    press: () {  },
+                    title: 'Costume Measurements',
+                    press: () {
+                      log("Id: ${dancer.id}");
+                      Get.toNamed(RoutesName.measurementScreen,arguments: {
+                        "id" : dancer.id
+                      });
+                    },
                   ),
                 ],
               ),
@@ -80,7 +94,12 @@ class AddDancerDetailsScreen extends StatelessWidget {
                   CompJournalCard(
                     image: AppAssets.dance_shoes,
                     title: 'Dance Shoes',
-                    press: () {  },
+                    press: () {
+                      log("Id: ${dancer.id}");
+                      Get.toNamed(RoutesName.danceShoesScreen,arguments: {
+                        "id" : dancer.id
+                      });
+                    },
                   ),
                   CompJournalCard(
                     image: AppAssets.glass_schedule,

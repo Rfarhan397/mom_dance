@@ -8,6 +8,7 @@ import 'package:mom_dance/provider/countdown/countdown_provider.dart';
 import 'package:mom_dance/provider/dancer/dancer_provider.dart';
 import 'package:mom_dance/provider/image/image_provider.dart';
 import 'package:mom_dance/provider/login_signup/login_signup_provider.dart';
+import 'package:mom_dance/provider/measurements/measurement_provider.dart';
 import 'package:mom_dance/routes/routes.dart';
 import 'package:mom_dance/routes/routes_name.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CountdownProvider()),
         ChangeNotifierProvider(create: (_) => DancerProvider()),
         ChangeNotifierProvider(create: (_) => ImagePickProvider()),
+        ChangeNotifierProvider(create: (_) => MeasurementProvider()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

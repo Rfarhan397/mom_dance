@@ -10,4 +10,5 @@ static const dance_shoes = "assets/images/dance_shoes.webp";
 static const choreography_videos = "assets/images/choreography_videos.webp";
 static const dance_video = "assets/images/dance_video.webp";
 static const glass_schedule = "assets/images/glass_schedule.webp";
+static const body = "assets/images/body.png";
 }

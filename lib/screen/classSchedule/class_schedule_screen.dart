@@ -13,8 +13,8 @@ import 'package:provider/provider.dart';
 import '../../constant.dart';
 import '../../provider/dancer/dancer_provider.dart';
 
-class CompJournalScreen extends StatelessWidget {
-   CompJournalScreen({super.key});
+class ClassScheduleScreen extends StatelessWidget {
+  ClassScheduleScreen({super.key});
 
   var dateController = TextEditingController();
 
@@ -28,13 +28,13 @@ class CompJournalScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Comp Journal"),
+              SimpleHeader(text: "Class Schedule"),
               Container(
                width: Get.width,
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.comp_journal,fit: BoxFit.cover,),
+                  child: Image.asset(AppAssets.glass_schedule,fit: BoxFit.cover,),
                 ),
               ),
               SizedBox(height: 20.0,),
