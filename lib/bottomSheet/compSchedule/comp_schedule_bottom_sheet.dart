@@ -84,7 +84,7 @@ class CompScheduleBottomSheet extends StatelessWidget {
              dateController.text = "";
              compController.text = "";
               locationController.text = "";
-              Get.back();
+              Navigator.pop(context);
 
             }, width: Get.width, height: 50.0),
             SizedBox(height: 40.0,),

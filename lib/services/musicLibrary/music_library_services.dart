@@ -23,6 +23,7 @@ class MusicLibraryServices {
       showSnackBar(title: "Music Added", subtitle: "");
      // Provider.of<ImagePickProvider>(context,listen: false).clear();
        Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+       Navigator.pop(context);
     });
   }
 
@@ -35,6 +36,7 @@ class MusicLibraryServices {
       showSnackBar(title: "Music Added", subtitle: "");
       // Provider.of<ImagePickProvider>(context,listen: false).clear();
       Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+      Navigator.pop(context);
     });
   }
 

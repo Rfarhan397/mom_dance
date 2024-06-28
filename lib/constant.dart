@@ -86,6 +86,7 @@ void showCustomDialog({
   required VoidCallback onEdit,
   bool isThird = true,
   bool isSecond = true,
+  String thirdText = "Open",
   String secondText = "edit",
 }) {
   Get.dialog(
@@ -118,7 +119,7 @@ void showCustomDialog({
                 if(isThird)
                 TextButton(
                   onPressed: onDetails,
-                  child: TextWidget(text: "Add details",size: 12.0,color: Colors.white,),
+                  child: TextWidget(text: thirdText,size: 12.0,color: Colors.white,),
                 ),
                 if(isSecond)
                 TextButton(

@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   alignment: AlignmentDirectional.topEnd,
                   child:
 
-                      ButtonWidget(text: "Logout", width: 100.0,height: 50.0,onClicked: (){
+                      ButtonWidget(text: "Logout", width: 90.0,height: 40.0,onClicked: (){
                         customDialog(onClick: (){
                           logout();
                         }, title: "Logout", content: "are you sure to logout account");

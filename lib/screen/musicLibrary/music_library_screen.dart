@@ -106,8 +106,8 @@ class MusicCard extends StatelessWidget {
          Get.back();
        },
            onDetails: (){
+         log("message $musicUrl");
              launchWebUrl(url: musicUrl);
-
            },
            isThird: true,
            secondText: "Edit",
