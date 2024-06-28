@@ -10,6 +10,7 @@ import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/model/danceShoes/dance_shoes_model.dart';
 import 'package:mom_dance/res/appAsset/app_assets.dart';
 import 'package:mom_dance/res/appIcon/app_icons.dart';
+import 'package:mom_dance/services/danceShoes/dance_shoes_services.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
@@ -95,31 +96,52 @@ class DanceShoesScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           DanceShoesModel model = danceShoes[index];
-                          return  Table(
-                            border: TableBorder.all(width: 1.0,color: Colors.black),
-                            columnWidths: {
-                              0 : FlexColumnWidth(1),
-                              1 : FlexColumnWidth(1),
-                              2 : FlexColumnWidth(1),
-                              3 : FlexColumnWidth(1),
-                              4 : FlexColumnWidth(1),
-                              5 : FlexColumnWidth(1),
+                          return  GestureDetector(
+                            onTap: (){
+                              showCustomDialog(
+                                  isThird: false,
+                                  isSecond: true,
+                                  onDelete: () async{
+                                    await  DanceShoesServices().deleteDanceShoes(model.id, context,model.dancerId);
+                                    Get.back();
+                                  }, onDetails: (){}, onEdit: (){
+                                Navigator.pop(context);
+                                Get.bottomSheet(DanceShoesBottomSheet(
+                                  id: model.id,
+                                  dancerID: model.dancerId,
+                                  size: model.size,
+                                  shoes: model.shoes,
+                                  brand: model.brand,
+                                  type: 'edit',
+                                ));
+                              });
                             },
-                            children: [
-                              TableRow(
-                                  children: [
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.shoes,color: Colors.black, size: 10.0))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.brand, color: Colors.black,size: 10.0))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.size,color: Colors.black, size: 10.0))),
-                                  ]
-                              )
-                            ],
+                            child: Table(
+                              border: TableBorder.all(width: 1.0,color: Colors.black),
+                              columnWidths: {
+                                0 : FlexColumnWidth(1),
+                                1 : FlexColumnWidth(1),
+                                2 : FlexColumnWidth(1),
+                                3 : FlexColumnWidth(1),
+                                4 : FlexColumnWidth(1),
+                                5 : FlexColumnWidth(1),
+                              },
+                              children: [
+                                TableRow(
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.shoes,color: Colors.black, size: 10.0))),
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.brand, color: Colors.black,size: 10.0))),
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.size,color: Colors.black, size: 10.0))),
+                                    ]
+                                )
+                              ],
+                            ),
                           );
                         },
                       );

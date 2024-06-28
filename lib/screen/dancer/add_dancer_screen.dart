@@ -99,10 +99,12 @@ class AddDancerScreen extends StatelessWidget {
                               await dancerProvider.addDancer(dancers,context);
 
                               nameController.text = "";
+                              Navigator.pop(context);
                             }else{
                               showSnackBar(title: "Image Required", subtitle: "");
                             }
-                          }else{
+                          }
+                          else{
                             provider.setLoading(true);
                             String? downloadUrl;
                             if(imageProvider.imageFile != null){

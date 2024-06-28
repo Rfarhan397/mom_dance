@@ -10,7 +10,15 @@ import '../../helper/text_widget.dart';
 
 class DanceShoesBottomSheet extends StatelessWidget {
   final String id;
-  DanceShoesBottomSheet({super.key, required this.id});
+  String shoesID,type,shoes,brand,size,dancerID;
+  DanceShoesBottomSheet({super.key, required this.id,
+  this.type = 'new',
+  this.shoesID = '',
+  this.shoes = '',
+  this.brand = '',
+  this.size = '',
+  this.dancerID = '',
+  });
 
   var shoesController = TextEditingController();
   var brandController = TextEditingController();
@@ -35,31 +43,31 @@ class DanceShoesBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Shoes", size: 16.0,color: Colors.white,),
+            TextWidget(text: type == "edit"  ? "Update Shoes" : "Add Shoes", size: 16.0,color: Colors.white,),
 
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Shoes", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Shoes", controller: shoesController),
+            CustomTextField(hintText: type == "edit"  ? shoesController.text = shoes : "Shoes", controller: shoesController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Brand / Style", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "brand", controller: brandController),
+            CustomTextField(hintText:type == "edit"  ? brandController.text = brand : "brand", controller: brandController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Size", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "size", controller: sizeController),
+            CustomTextField(hintText:type == "edit"  ? sizeController.text = size : "size", controller: sizeController),
 
             SizedBox(height: 40.0,),
-            SimpleButtonWidget(text: "Add", onClicked: () async{
+            SimpleButtonWidget(text:  type == "edit" ? "Update": "Add", onClicked: () async{
 
 
               final danceShoes = DanceShoesModel(
-                  id: autoID(),
-                  dancerId: id,
+                  id: type == "edit" ?id : autoID(),
+                  dancerId: type == "edit" ? dancerID : id,
                   userUID: auth.currentUser!.uid.toString(),
                   shoes: shoesController.text.toString().trim(),
                   brand: brandController.text.toString().trim(),
@@ -67,11 +75,18 @@ class DanceShoesBottomSheet extends StatelessWidget {
 
               );
 
-             await DanceShoesServices().addDanceShoes(danceShoes, context, id);
+              if(type == "edit"){
+                await DanceShoesServices().updateDanceShoes(danceShoes, context, id);
+              }else{
+                await DanceShoesServices().addDanceShoes(danceShoes, context, id);
+              }
+
+
+
               shoesController.text = "";
               brandController.text = "";
               sizeController.text = "";
-
+              Get.back();
             }, width: Get.width, height: 50.0),
             SizedBox(height: 40.0,),
           ],

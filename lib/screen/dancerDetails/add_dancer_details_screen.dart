@@ -103,28 +103,33 @@ class AddDancerDetailsScreen extends StatelessWidget {
                   ),
                   CompJournalCard(
                     image: AppAssets.glass_schedule,
-                    title: 'Glass Schedule',
-                    press: () {  },
+                    title: 'Class Schedule',
+                    press: () {
+                      log("Id: ${dancer.id}");
+                      Get.toNamed(RoutesName.classSchedule,arguments: {
+                        "id" : dancer.id
+                      });
+                    },
                   ),
                 ],
               ),
 
-              const SizedBox(height: 20.0,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CompJournalCard(
-                    image: AppAssets.choreography_videos,
-                    title: 'Choreography Videos ',
-                    press: () {  },
-                  ),
-                  CompJournalCard(
-                    image: AppAssets.dance_video,
-                    title: 'Dance Videos',
-                    press: () {  },
-                  ),
-                ],
-              ),
+              // const SizedBox(height: 20.0,),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     CompJournalCard(
+              //       image: AppAssets.choreography_videos,
+              //       title: 'Choreography Videos ',
+              //       press: () {  },
+              //     ),
+              //     CompJournalCard(
+              //       image: AppAssets.dance_video,
+              //       title: 'Dance Videos',
+              //       press: () {  },
+              //     ),
+              //   ],
+              // ),
             ],
             ),
           ),

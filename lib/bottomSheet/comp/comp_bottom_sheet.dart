@@ -13,7 +13,20 @@ import '../../helper/text_widget.dart';
 import '../../provider/constant/value_provider.dart';
 class CompBottomSheet extends StatelessWidget {
   final String id;
-   CompBottomSheet({super.key, required this.id});
+
+  String date,comp,dance,adjuction,overAll,special,compID,type,dancerID;
+   CompBottomSheet({super.key,
+     required this.id,
+     this.date = '',
+     this.comp = 'comp',
+     this.dance = '',
+     this.adjuction = '',
+     this.overAll = '',
+     this.special = '',
+     this.compID = '',
+     this.dancerID = '',
+     this.type = 'new',
+   });
 
   var dateController = TextEditingController();
   var compController = TextEditingController();
@@ -54,7 +67,7 @@ class CompBottomSheet extends StatelessWidget {
                     },
                     radius: 15.0,
                     hintText: provider.selectedDate == null ?
-                    "Select Date" :
+                    type == "edit" ? dateController.text = date : "Select Date" :
                     dateController.text = "${provider.selectedDate.day}/${provider.selectedDate.month}/${provider.selectedDate.year}",
                     controller: dateController
                 );
@@ -63,51 +76,57 @@ class CompBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
             TextWidget(text: "Comp", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "comp", controller: compController),
+            CustomTextField(hintText: type == "edit" ? compController.text = comp : "comp", controller: compController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Dance", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Dance", controller: daceController),
+            CustomTextField(hintText: type == "edit" ? daceController.text = dance : "Dance", controller: daceController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Adjuction", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "adjuction", controller: adjuctionController),
+            CustomTextField(hintText:type == "edit" ? adjuctionController.text = adjuction :   "adjuction", controller: adjuctionController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Overall", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Overall", controller: overAllController),
+            CustomTextField(hintText:type == "edit" ? overAllController.text = overAll :  "Overall", controller: overAllController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Special", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Special", controller: specialController),
+            CustomTextField(hintText:type == "edit" ? specialController.text = special :  "Special", controller: specialController),
 
             SizedBox(height: 40.0,),
-            SimpleButtonWidget(text: "Add", onClicked: () async{
+            SimpleButtonWidget(text: type == "edit" ? "Update" : "Add", onClicked: () async{
 
 
               final compJournal = CompJournalModel(
-                  id: autoID(),
+                  id: type == "edit" ? compID : autoID(),
                   date: dateController.text.toString().trim(),
                   comp: compController.text.toString().trim(),
-                  dancerId: id,
+                  dancerId: type == "edit" ? dancerID : id,
                   userUID: auth.currentUser!.uid.toString(),
                   dance: daceController.text.toString().trim(),
                   adjuction: adjuctionController.text.toString().trim(),
                   overAll: overAllController.text.toString().trim(),
-                  special: specialController.text.toString().trim()
+                  special: specialController.text.toString().trim(),
               );
 
-             await CompJournalServices().addCompJournal(compJournal, context, id);
+              if(type == "edit"){
+                await CompJournalServices().updateCompJournal(compJournal, context, dancerID,compID);
+              }else{
+                await CompJournalServices().addCompJournal(compJournal, context, id);
+              }
+
              dateController.text = "";
              compController.text = "";
              daceController.text = "";
              adjuctionController.text = "";
              overAllController.text = "";
              specialController.text = "";
+            //  Get.back();
 
             }, width: Get.width, height: 50.0),
             SizedBox(height: 40.0,),

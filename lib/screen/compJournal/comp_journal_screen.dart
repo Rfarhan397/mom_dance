@@ -8,6 +8,7 @@ import 'package:mom_dance/helper/text_widget.dart';
 import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/res/appAsset/app_assets.dart';
 import 'package:mom_dance/res/appIcon/app_icons.dart';
+import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
@@ -56,37 +57,37 @@ class CompJournalScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Date", size: 12.0,color: Colors.white,))),
+                          child: Center(child: TextWidget(text: "Date", size: 10.0,color: Colors.white,))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Comp", size: 12.0,color: Colors.white))),
+                          child: Center(child: TextWidget(text: "Comp", size: 10.0,color: Colors.white))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Dance", size: 12.0,color: Colors.white))),
+                          child: Center(child: TextWidget(text: "Dance", size: 10.0,color: Colors.white))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Adjuction",color: Colors.white, size: 12.0,maxLine: 1 ,))),
+                          child: Center(child: TextWidget(text: "Adjuction",color: Colors.white, size: 10.0,maxLine: 1 ,))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Overall", color: Colors.white,size: 12.0))),
+                          child: Center(child: TextWidget(text: "Overall", color: Colors.white,size: 10.0))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Special",color: Colors.white, size: 12.0))),
+                          child: Center(child: TextWidget(text: "Special",color: Colors.white, size: 10.0))),
                     ]
                   )
                 ],
@@ -114,40 +115,71 @@ class CompJournalScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                          CompJournalModel model = compJournal[index];
                          log("message${model.date}");
-                          return  Table(
-                            border: TableBorder.all(width: 1.0,color: Colors.black),
-                            columnWidths: {
-                              0 : FlexColumnWidth(1),
-                              1 : FlexColumnWidth(1),
-                              2 : FlexColumnWidth(1),
-                              3 : FlexColumnWidth(1),
-                              4 : FlexColumnWidth(1),
-                              5 : FlexColumnWidth(1),
+                          return  GestureDetector(
+                            onTap: (){
+                              showCustomDialog(onDelete: () async{
+                                await CompJournalServices().deleteCompJournal(
+                                  id: model.id.toString(),
+                                  dancerID: model.dancerId.toString(),
+                                  context: context
+                                );
+                               Navigator.pop(context);
+                              },
+                                  onDetails: (){},
+                                  isThird: false,
+                                  onEdit: (){
+                                    Navigator.pop(context);
+                                    Get.bottomSheet(CompBottomSheet(
+                                      id: model.id,
+                                      comp: model.comp,
+                                      dance: model.dance,
+                                      adjuction: model.adjuction,
+                                      overAll: model.overAll,
+                                      special: model.special,
+                                      date: model.date,
+                                      compID: model.id,
+                                      dancerID: model.dancerId,
+                                      type: 'edit',
+                                    ));
+                                  }
+                              );
+
                             },
-                            children: [
-                              TableRow(
-                                  children: [
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.date, size: 10.0,color: Colors.black,))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.comp, size: 10.0,color: Colors.black))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.dance, size: 10.0,color: Colors.black))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.adjuction,color: Colors.black, size: 10.0))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.overAll, color: Colors.black,size: 10.0))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.special,color: Colors.black, size: 10.0))),
-                                  ]
-                              )
-                            ],
+                            child: Table(
+                              border: TableBorder.all(width: 1.0,color: Colors.black),
+                              columnWidths: {
+                                0 : FlexColumnWidth(1),
+                                1 : FlexColumnWidth(1),
+                                2 : FlexColumnWidth(1),
+                                3 : FlexColumnWidth(1),
+                                4 : FlexColumnWidth(1),
+                                5 : FlexColumnWidth(1),
+                              },
+                              children: [
+                                TableRow(
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.date, size: 10.0,color: Colors.black,))),
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.comp, size: 10.0,color: Colors.black))),
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.dance, size: 10.0,color: Colors.black))),
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.adjuction,color: Colors.black, size: 10.0))),
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.overAll, color: Colors.black,size: 10.0))),
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.special,color: Colors.black, size: 10.0))),
+                                    ]
+                                )
+                              ],
+                            ),
                           );
                         },
                       );

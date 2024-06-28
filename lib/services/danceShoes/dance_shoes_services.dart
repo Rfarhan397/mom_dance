@@ -24,19 +24,36 @@ class DanceShoesServices {
       showSnackBar(title: "Details Updated", subtitle: "");
      // Provider.of<ImagePickProvider>(context,listen: false).clear();
        Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+      Navigator.pop(context);
     });
   }
 
-  Future<void> updateDancerShoes(DancerModel dancer,BuildContext context) async {
-    await _db.collection(DbKey.c_dancers).doc(dancer.id).update(dancer.toMap()).whenComplete((){
-      showSnackBar(title: "Dancer updated", subtitle: "");
-     final provider = Provider.of<ImagePickProvider>(context,listen: false);
-     if(provider.imageFile !=null){
-       provider.clear();
-     }
+  Future<void> updateDanceShoes(DanceShoesModel compJournal,BuildContext context,String dancerID) async {
+    await _db
+        .collection(DbKey.c_dancers)
+        .doc(compJournal.dancerId)
+        .collection(DbKey.c_danceShoes)
+        .doc(compJournal.id)
+        .update(compJournal.toMap())
+        .whenComplete((){
+      showSnackBar(title: "Details Updated", subtitle: "");
+      // Provider.of<ImagePickProvider>(context,listen: false).clear();
+      Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+      Navigator.pop(context);
+    });
+  }
+
+  Future<void> deleteDanceShoes(String shoesID,BuildContext context,String dancerID) async {
+    await _db
+        .collection(DbKey.c_dancers)
+        .doc(dancerID)
+        .collection(DbKey.c_danceShoes)
+        .doc(shoesID)
+        .delete()
+        .whenComplete((){
+      showSnackBar(title: "Shoes deleted", subtitle: "");
+      // Provider.of<ImagePickProvider>(context,listen: false).clear();
       Provider.of<ValueProvider>(context,listen: false).setLoading(false);
     });
   }
-
-
 }

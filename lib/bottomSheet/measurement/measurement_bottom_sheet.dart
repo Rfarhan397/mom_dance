@@ -47,7 +47,7 @@ class MeasurementBottomSheet extends StatelessWidget {
 
            await provider.saveMeasurements(id: id, key: keyName, value: detailsController.text.toString()..trim());
            provider.getMeasurement(id: id);
-
+           Get.back();
 
             }, width: Get.width, height: 50.0),
             SizedBox(height: 40.0,),

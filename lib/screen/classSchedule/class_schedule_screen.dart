@@ -2,12 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mom_dance/bottomSheet/classSchedule/class_schedule_bottom_sheet.dart';
 import 'package:mom_dance/bottomSheet/comp/comp_bottom_sheet.dart';
 import 'package:mom_dance/helper/simple_header.dart';
 import 'package:mom_dance/helper/text_widget.dart';
 import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
+import 'package:mom_dance/provider/classSchedulle/class_schedule_provider.dart';
 import 'package:mom_dance/res/appAsset/app_assets.dart';
 import 'package:mom_dance/res/appIcon/app_icons.dart';
+import 'package:mom_dance/res/appString/app_string.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
@@ -26,143 +29,74 @@ class ClassScheduleScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              SimpleHeader(text: "Class Schedule"),
-              Container(
-               width: Get.width,
-                height: Get.width * 0.450,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.glass_schedule,fit: BoxFit.cover,),
-                ),
-              ),
-              SizedBox(height: 20.0,),
-              Table(
-                border: TableBorder.all(width: 1.0,color: Colors.black),
-                columnWidths: {
-                  0 : FlexColumnWidth(1),
-                  1 : FlexColumnWidth(1),
-                  2 : FlexColumnWidth(1),
-                  3 : FlexColumnWidth(1),
-                  4 : FlexColumnWidth(1),
-                  5 : FlexColumnWidth(1),
-                },
+          child: Consumer<ClassScheduleProvider>(
+            builder: (context,provider, child){
+              return Column(
                 children: [
-                  TableRow(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Date", size: 12.0,color: Colors.white,))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Comp", size: 12.0,color: Colors.white))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Dance", size: 12.0,color: Colors.white))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Adjuction",color: Colors.white, size: 12.0,maxLine: 1 ,))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Overall", color: Colors.white,size: 12.0))),
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "Special",color: Colors.white, size: 12.0))),
-                    ]
-                  )
+                  SimpleHeader(text: "Class Schedule"),
+                  Container(
+                    width: Get.width,
+                    height: Get.width * 0.450,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.asset(AppAssets.glass_schedule,fit: BoxFit.cover,),
+                    ),
+                  ),
+                  SizedBox(height: 20.0,),
+
+                  Container(
+                    width: Get.width,
+                    padding : EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                        color: primaryColor,
+                        border: Border.all(color: Colors.black,width: 1.0)
+                    ),
+                    child: TextWidget(text: "Sunday",size: 12.0,),
+                  ),
+
+                  Container(
+                    width: Get.width,
+                    padding : EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black,width: 1.0)
+                    ),
+                    child: TextWidget(text: provider.sunday,size: 12.0,),
+                  ),
+
+
+                  SizedBox(height: 20.0,),
+
+                  Container(
+                    width: Get.width,
+                    padding : EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                        color: primaryColor,
+                        border: Border.all(color: Colors.black,width: 1.0)
+                    ),
+                    child: TextWidget(text: "Monday",size: 12.0,),
+                  ),
+
+                  Container(
+                    width: Get.width,
+                    padding : EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black,width: 1.0)
+                    ),
+                    child: TextWidget(text: provider.monday,size: 12.0,),
+                  ),
+
+
                 ],
-              ),
-              Consumer<DancerProvider>(
-                builder: (context, productProvider, child) {
-                  return StreamBuilder<List<CompJournalModel>>(
-                    stream: productProvider.getCompJournal(dancerID: arguments['id'] ?? ""),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      }
-                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No Comp Journal found'));
-                      }
-
-                      List<CompJournalModel> compJournal = snapshot.data!;
-                      return ListView.builder(
-                        itemCount: compJournal.length,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                         CompJournalModel model = compJournal[index];
-                         log("message${model.date}");
-                          return  Table(
-                            border: TableBorder.all(width: 1.0,color: Colors.black),
-                            columnWidths: {
-                              0 : FlexColumnWidth(1),
-                              1 : FlexColumnWidth(1),
-                              2 : FlexColumnWidth(1),
-                              3 : FlexColumnWidth(1),
-                              4 : FlexColumnWidth(1),
-                              5 : FlexColumnWidth(1),
-                            },
-                            children: [
-                              TableRow(
-                                  children: [
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.date, size: 10.0,color: Colors.black,))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.comp, size: 10.0,color: Colors.black))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.dance, size: 10.0,color: Colors.black))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.adjuction,color: Colors.black, size: 10.0))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.overAll, color: Colors.black,size: 10.0))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.special,color: Colors.black, size: 10.0))),
-                                  ]
-                              )
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
-
-            ],
+              );
+            },
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.bottomSheet(CompBottomSheet(id: arguments['id'] ?? "null",));
+          Get.bottomSheet(ClassScheduleBottomSheet(id: arguments['id'] ?? "null",));
         },
         tooltip: 'Increment',
         backgroundColor: primaryColor,

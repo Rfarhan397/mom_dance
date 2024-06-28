@@ -15,7 +15,14 @@ import '../../helper/text_widget.dart';
 import '../../provider/constant/value_provider.dart';
 class SkillGoalBottomSheet extends StatelessWidget {
   final String id;
-  SkillGoalBottomSheet({super.key, required this.id});
+  String skillID,skill,date,type,dancerID;
+  SkillGoalBottomSheet({super.key, required this.id,
+  this.skill = '',
+  this.skillID = '',
+  this.date = '',
+  this.type = 'new',
+  this.dancerID = '',
+  });
 
   var dateController = TextEditingController();
   var skillController = TextEditingController();
@@ -41,12 +48,12 @@ class SkillGoalBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Skill Goal", size: 16.0,color: Colors.white,),
+            TextWidget(text: type == "edit" ? "Update Skill Goal" :"Add Skill Goal", size: 16.0,color: Colors.white,),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Skill", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "skill", controller: skillController),
+            CustomTextField(hintText: type == "edit" ?skillController.text = skill  :"skill", controller: skillController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Date", size: 14.0,color: Colors.white,),
@@ -59,7 +66,7 @@ class SkillGoalBottomSheet extends StatelessWidget {
                     },
                     radius: 15.0,
                     hintText: provider.selectedDate == null ?
-                    "Select Date" :
+                    type == "edit" ? dateController.text = date  : "Select Date" :
                     dateController.text = "${provider.selectedDate.day}/${provider.selectedDate.month}/${provider.selectedDate.year}",
                     controller: dateController
                 );
@@ -67,21 +74,26 @@ class SkillGoalBottomSheet extends StatelessWidget {
             ),
 
             SizedBox(height: 40.0,),
-            SimpleButtonWidget(text: "Add", onClicked: () async{
+            SimpleButtonWidget(text:type == "edit" ? "Update" :  "Add", onClicked: () async{
 
 
               final skillModel = SkillGoalModel(
-                  id: autoID(),
+                  id: type == "edit" ? id : autoID(),
                   date: dateController.text.toString().trim(),
                   skill: skillController.text.toString().trim(),
-                  dancerId: id,
+                  dancerId:type == "edit" ? dancerID : id,
                   userUID: auth.currentUser!.uid.toString(),
               );
 
-             await SkillGoallServices().addSkillGoal(skillModel, context, id);
+              if(type == "edit"){
+                await SkillGoallServices().updateSkillGoal(skillModel, context, id);
+              }else{
+                await SkillGoallServices().addSkillGoal(skillModel, context, id);
+              }
+
              dateController.text = "";
              skillController.text = "";
-
+              Get.back();
             }, width: Get.width, height: 50.0),
             SizedBox(height: 40.0,),
           ],

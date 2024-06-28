@@ -24,16 +24,35 @@ class SkillGoallServices {
       showSnackBar(title: "Skill Added", subtitle: "");
      // Provider.of<ImagePickProvider>(context,listen: false).clear();
        Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+      Navigator.pop(context);
     });
   }
 
-  Future<void> updateDancer(DancerModel dancer,BuildContext context) async {
-    await _db.collection(DbKey.c_dancers).doc(dancer.id).update(dancer.toMap()).whenComplete((){
-      showSnackBar(title: "Dancer updated", subtitle: "");
-     final provider = Provider.of<ImagePickProvider>(context,listen: false);
-     if(provider.imageFile !=null){
-       provider.clear();
-     }
+  Future<void> updateSkillGoal(SkillGoalModel skillModel,BuildContext context,String dancerID) async {
+    await _db
+        .collection(DbKey.c_dancers)
+        .doc(skillModel.dancerId)
+        .collection(DbKey.c_skillGoals)
+        .doc(skillModel.id)
+        .update(skillModel.toMap())
+        .whenComplete((){
+      showSnackBar(title: "Skill Added", subtitle: "");
+      // Provider.of<ImagePickProvider>(context,listen: false).clear();
+      Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+      Navigator.pop(context);
+    });
+  }
+
+  Future<void> deleteKillGoal(String skillId,BuildContext context,String dancerID) async {
+    await _db
+        .collection(DbKey.c_dancers)
+        .doc(dancerID)
+        .collection(DbKey.c_skillGoals)
+        .doc(skillId)
+        .delete()
+        .whenComplete((){
+      showSnackBar(title: "Skill Deleted", subtitle: "");
+      // Provider.of<ImagePickProvider>(context,listen: false).clear();
       Provider.of<ValueProvider>(context,listen: false).setLoading(false);
     });
   }

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mom_dance/constant.dart';
+import 'package:mom_dance/helper/button_widget.dart';
 import 'package:mom_dance/helper/countdown_class.dart';
 import 'package:mom_dance/helper/text_widget.dart';
+import 'package:mom_dance/provider/user/user_provider.dart';
 import 'package:mom_dance/res/appAsset/app_assets.dart';
 import 'package:mom_dance/res/appIcon/app_icons.dart';
 import 'package:mom_dance/res/appString/app_string.dart';
 import 'package:mom_dance/routes/routes_name.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../helper/menu_card.dart';
 class HomeScreen extends StatelessWidget {
@@ -14,6 +18,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<UserProvider>(context,listen: false).fetchUserProfile();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -21,10 +26,45 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
+                Align(
+                  alignment: AlignmentDirectional.topEnd,
+                  child:
+
+                      ButtonWidget(text: "Logout", width: 100.0,height: 50.0,onClicked: (){
+                        customDialog(onClick: (){
+                          logout();
+                        }, title: "Logout", content: "are you sure to logout account");
+
+                      },),
+                ),
+                const SizedBox(height: 10.0,),
                 Image.asset(AppAssets.logo,width: Get.width,height: Get.width/2.5,),
-                SizedBox(height: 20.0,),
-                TextWidget(text: "Hello Marine", size: 22.0),
-                SizedBox(height: 20.0,),
+                const SizedBox(height: 10.0,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Consumer<UserProvider>(
+                      builder: (context, userProvider, child) {
+                        if (userProvider.isLoading) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+
+                        return Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextWidget(text: "Hello, ${userProvider.name.toString()}", size: 22.0,),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+
+
+                  ],
+                ),
+
                 Container(
                   padding: EdgeInsets.all(20.0),
                   decoration: BoxDecoration(
@@ -33,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Center(child: TextWidget(text: AppString.home_text,size: 18.0,color: Colors.white,textAlignment: TextAlign.center,)),
                 ),
-          
+
                 // menu
                 SizedBox(height: 20.0,),
                 Row(
@@ -48,13 +88,17 @@ class HomeScreen extends StatelessWidget {
                     ),
                     MenuCard(
                       image: AppIcons.ic_calender,
-                      title: 'Comp Schduels',
-                      press: () {  },
+                      title: 'Comp Schedules',
+                      press: () {
+                        Get.toNamed(RoutesName.compSchedule);
+                      },
                     ),
                     MenuCard(
                       image: AppIcons.ic_travel,
                       title: 'Travel Details',
-                      press: () {  },
+                      press: () {
+                        Get.toNamed(RoutesName.travelDetailsScreen);
+                      },
                     ),
                   ],
                 ),
@@ -65,17 +109,23 @@ class HomeScreen extends StatelessWidget {
                     MenuCard(
                       image: AppIcons.ic_video,
                       title: 'Music Library',
-                      press: () {  },
+                      press: () {
+                        Get.toNamed(RoutesName.musicLibraryScreen);
+                      },
                     ),
                     MenuCard(
                       image: AppIcons.ic_links,
                       title: 'Favorite Links',
-                      press: () {  },
+                      press: () {
+                        Get.toNamed(RoutesName.favouriteScreen);
+                      },
                     ),
                     MenuCard(
                       image: AppIcons.ic_album,
                       title: 'Dance Album',
-                      press: () {  },
+                      press: () {
+                        Get.toNamed(RoutesName.danceAlbumScreen);
+                      },
                     ),
                   ],
                 ),
@@ -86,29 +136,41 @@ class HomeScreen extends StatelessWidget {
                     MenuCard(
                       image: AppIcons.ic_list,
                       title: 'Comp Packing List',
-                      press: () {  },
+                      press: () {
+                        Get.toNamed(RoutesName.compPackingScreen);
+                      },
                     ),
                     MenuCard(
                       image: AppIcons.ic_offer,
                       title: 'Special Offers',
-                      press: () {  },
+                      press: () {
+                        launchWebUrl(url: 'https://www.dancemomlife.com/');
+                        },
                     ),
                     MenuCard(
                       image: AppIcons.ic_web,
                       title: 'DanceMomLife.com',
-                      press: () {  },
+                      press: () {
+                        launchWebUrl(url: 'https://www.dancemomlife.com/');
+                      },
                     ),
                   ],
                 ),
-          
+
                 const SizedBox(height: 20.0,),
                 CountdownScreen()
-          
+
               ],
             ),
           ),
         ),
       ),
     );
+  }
+  Future<void> launchWebUrl({required String url}) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $url';
+    }
   }
 }

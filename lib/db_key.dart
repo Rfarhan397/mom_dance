@@ -3,9 +3,16 @@ class DbKey{
   // collections
   static const c_users = "users";
   static const c_dancers = "dancers";
+  static const c_compSchedule = "compSchedule";
+  static const c_travelDetails = "travelDetails";
+  static const c_favouriteLinks = "favoriteLinks";
+  static const c_musicLibrary = "musicLibrary";
+  static const c_danceAlbum = "danceAlbum";
+  static const c_compPacking = "compPacking";
   static const c_compJournal = "compJournal";
   static const c_danceShoes = "danceShoes";
   static const c_measurement = "measurement";
+  static const c_classSchedule = "classSchedule";
   static const c_skillGoals = "skillGoals";
   static const c_costumeChecklist = "costumeChecklist";
 
@@ -34,5 +41,7 @@ class DbKey{
   static const k_hip = "hip";
   static const k_knee = "knee";
   static const k_lastUpdate = "lastUpdate";
+  static const k_sunday = "sunday";
+  static const k_monday = "monday";
 
 }

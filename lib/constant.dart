@@ -50,9 +50,9 @@ void showSnackBar({required title, required subtitle}){
 
 logout(){
   auth.signOut().then((value){
-  //  Get.offAll(()=> LoginScreen());
+    Get.offAllNamed(RoutesName.loginScreen);
   }).catchError((e){
-   // Get.offAll(()=> LoginScreen());
+    Get.offAllNamed(RoutesName.loginScreen);
   });
 }
 
@@ -80,7 +80,14 @@ Future<void> selectDateFun(BuildContext context, DateTime? _selectedDate) async 
   }
 }
 
-void showCustomDialog({required VoidCallback onDelete,required VoidCallback onDetails,required VoidCallback onEdit}) {
+void showCustomDialog({
+  required VoidCallback onDelete,
+  required VoidCallback onDetails,
+  required VoidCallback onEdit,
+  bool isThird = true,
+  bool isSecond = true,
+  String secondText = "edit",
+}) {
   Get.dialog(
     Dialog(
       shape: RoundedRectangleBorder(
@@ -108,14 +115,65 @@ void showCustomDialog({required VoidCallback onDelete,required VoidCallback onDe
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                if(isThird)
                 TextButton(
                   onPressed: onDetails,
                   child: TextWidget(text: "Add details",size: 12.0,color: Colors.white,),
                 ),
+                if(isSecond)
                 TextButton(
                   onPressed: onEdit,
-                  child: TextWidget(text: "Edit",size: 12.0,color: Colors.white,),
+                  child: TextWidget(text: secondText,size: 12.0,color: Colors.white,),
                 ),
+                TextButton(
+                  onPressed: onDelete,
+                  child: TextWidget(text: "Delete",size: 12.0,color: Colors.white,),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+
+void showCustomDialogBox({
+  required VoidCallback onDelete,
+  required VoidCallback onEdit,
+}) {
+  Get.dialog(
+    Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        width: Get.width * 0.82,
+        height: Get.width * 0.42,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: gradientColor,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Tap any to take Action',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                  TextButton(
+                    onPressed: onEdit,
+                    child: TextWidget(text: "Edit",size: 12.0,color: Colors.white,),
+                  ),
                 TextButton(
                   onPressed: onDelete,
                   child: TextWidget(text: "Delete",size: 12.0,color: Colors.white,),

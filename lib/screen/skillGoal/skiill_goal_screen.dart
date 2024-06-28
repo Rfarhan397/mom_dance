@@ -10,6 +10,7 @@ import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/model/skillGoal/skill_goal_model.dart';
 import 'package:mom_dance/res/appAsset/app_assets.dart';
 import 'package:mom_dance/res/appIcon/app_icons.dart';
+import 'package:mom_dance/services/skillGoal/skill_goall_services.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
@@ -92,28 +93,48 @@ class SkiillGoalScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                          SkillGoalModel model = skillGoals[index];
                          log("message${model.date}");
-                          return  Table(
-                            border: TableBorder.all(width: 1.0,color: Colors.black),
-                            columnWidths: {
-                              0 : FlexColumnWidth(1),
-                              1 : FlexColumnWidth(1),
-                              2 : FlexColumnWidth(1),
-                              3 : FlexColumnWidth(1),
-                              4 : FlexColumnWidth(1),
-                              5 : FlexColumnWidth(1),
+                          return  GestureDetector(
+                            onTap: (){
+                              showCustomDialog(
+                                  isThird: false,
+                                  isSecond: true,
+                                  onDelete: () async{
+                                    await  SkillGoallServices().deleteKillGoal(model.id, context,model.dancerId);
+                                    Get.back();
+                                  }, onDetails: (){}, onEdit: (){
+                                Navigator.pop(context);
+                                Get.bottomSheet(SkillGoalBottomSheet(
+                                  id: model.id,
+                                  skill: model.skill,
+                                  date: model.date,
+                                  dancerID: model.dancerId,
+                                  type: 'edit',
+                                ));
+                              });
                             },
-                            children: [
-                              TableRow(
-                                  children: [
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.skill, size: 12.0,color: Colors.black,))),
-                                    Container(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Center(child: TextWidget(text: model.date, size: 12.0,color: Colors.black))),
-                                  ]
-                              )
-                            ],
+                            child: Table(
+                              border: TableBorder.all(width: 1.0,color: Colors.black),
+                              columnWidths: {
+                                0 : FlexColumnWidth(1),
+                                1 : FlexColumnWidth(1),
+                                2 : FlexColumnWidth(1),
+                                3 : FlexColumnWidth(1),
+                                4 : FlexColumnWidth(1),
+                                5 : FlexColumnWidth(1),
+                              },
+                              children: [
+                                TableRow(
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.skill, size: 12.0,color: Colors.black,))),
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.date, size: 12.0,color: Colors.black))),
+                                    ]
+                                )
+                              ],
+                            ),
                           );
                         },
                       );

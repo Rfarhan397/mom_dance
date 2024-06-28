@@ -64,9 +64,14 @@ class LoginScreen extends StatelessWidget {
                        controller: passwordController, obscurePassword: _obscurePassword,),
 
                      SizedBox(height: 10.0,),
-                     Align(
-                         alignment: AlignmentDirectional.centerEnd,
-                         child: TextWidget(text: "Forgot Password?", size: 12.0,isBold: true,)),
+                     GestureDetector(
+                       onTap: (){
+                         Get.toNamed(RoutesName.forgotScreen);
+                       },
+                       child: Align(
+                           alignment: AlignmentDirectional.centerEnd,
+                           child: TextWidget(text: "Forgot Password?", size: 12.0,isBold: true,)),
+                     ),
                      SizedBox(height: 50.0,),
                      Consumer<ValueProvider>(
                        builder: (context, provider, child){

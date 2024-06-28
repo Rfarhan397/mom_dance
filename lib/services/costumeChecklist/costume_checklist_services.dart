@@ -24,6 +24,36 @@ class CostumeChecklistServices {
       showSnackBar(title: "costumes Added", subtitle: "");
      // Provider.of<ImagePickProvider>(context,listen: false).clear();
        Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+      Navigator.pop(context);
+    });
+  }
+
+  Future<void> updateCostumeChecklist(CostumeChecklistModel costumes,BuildContext context,String dancerID) async {
+    await _db
+        .collection(DbKey.c_dancers)
+        .doc(costumes.dancerId)
+        .collection(DbKey.c_costumeChecklist)
+        .doc(costumes.id)
+        .update(costumes.toMap())
+        .whenComplete((){
+      showSnackBar(title: "costumes Updated", subtitle: "");
+      // Provider.of<ImagePickProvider>(context,listen: false).clear();
+      Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+      Navigator.pop(context);
+    });
+  }
+
+  Future<void> deleteCostumeChecklist(String costumesID,BuildContext context,String dancerID) async {
+    await _db
+        .collection(DbKey.c_dancers)
+        .doc(dancerID)
+        .collection(DbKey.c_costumeChecklist)
+        .doc(costumesID)
+        .delete()
+        .whenComplete((){
+      showSnackBar(title: "costumes Deleted", subtitle: "");
+      // Provider.of<ImagePickProvider>(context,listen: false).clear();
+      Provider.of<ValueProvider>(context,listen: false).setLoading(false);
     });
   }
 

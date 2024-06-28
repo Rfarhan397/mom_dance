@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../../constant.dart';
 import '../../helper/button_loading_widget.dart';
 import '../../helper/custom_textfield.dart';
+import '../../helper/image_loader_widget.dart';
 import '../../helper/simple_button_widget.dart';
 import '../../helper/text_widget.dart';
 import '../../provider/constant/value_provider.dart';
@@ -18,7 +19,16 @@ import '../../provider/image/image_provider.dart';
 import '../../res/appIcon/app_icons.dart';
 class CostumeChecklistBottomSheet extends StatelessWidget {
   final String id;
-  CostumeChecklistBottomSheet({super.key, required this.id});
+  String image,dancerID,dance,costume,accesspries,shoes,type;
+  CostumeChecklistBottomSheet({super.key, required this.id,
+  this.image = '',
+  this.dancerID = '',
+  this.dance = '',
+  this.costume = '',
+  this.accesspries = '',
+  this.shoes = '',
+  this.type = 'new',
+  });
 
   var dateController = TextEditingController();
   var daceController = TextEditingController();
@@ -46,7 +56,7 @@ class CostumeChecklistBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Constume Checklist", size: 16.0,color: Colors.white,isBold: true,),
+            TextWidget(text: type == "edit" ?  "Update Constume Checklist" : "Add Constume Checklist", size: 16.0,color: Colors.white,isBold: true,),
             SizedBox(height: 20.0,),
 
             Consumer<ImagePickProvider>(
@@ -64,7 +74,7 @@ class CostumeChecklistBottomSheet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child:  provider.imageFile !=null ? Image.file(provider.imageFile!,fit: BoxFit.contain,) :
-                    Image.asset(
+                    type == "edit" ? ImageLoaderWidget(imageUrl: image) : Image.asset(
                       AppIcons.ic_upload,
                       color: primaryColor,
                     ),
@@ -76,76 +86,85 @@ class CostumeChecklistBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
             TextWidget(text: "Dance", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Dance", controller: daceController),
+            CustomTextField(hintText:  type == "edit" ? daceController.text = dance : "Dance", controller: daceController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Accesspries", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Accesspries", controller: accesspriesController),
+            CustomTextField(hintText:type == "edit" ? accesspriesController.text = accesspries :  "Accesspries", controller: accesspriesController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Costume", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "costume", controller: constumeController),
+            CustomTextField(hintText:type == "edit" ? constumeController.text = costume :  "costume", controller: constumeController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Shoes", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "shoes", controller: shoesController),
+            CustomTextField(hintText: type == "edit" ? shoesController.text = shoes : "shoes", controller: shoesController),
 
             SizedBox(height: 40.0,),
-            SimpleButtonWidget(text: "Add", onClicked: () async{
-
-
-              final costumes = CostumeChecklistModel(
-                  id: autoID(),
-                  date: dateController.text.toString().trim(),
-                  image: "",
-                  dancerId: id,
-                  userUID: auth.currentUser!.uid.toString(),
-                  dance: daceController.text.toString().trim(),
-                  accesspries: accesspriesController.text.toString().trim(),
-                  shoes: shoesController.text.toString().trim(),
-                  costume: constumeController.text.toString().trim()
-              );
-
-             await CostumeChecklistServices().addCostumeChecklist(costumes, context, id);
-             dateController.text = "";
-              accesspriesController.text = "";
-             daceController.text = "";
-              shoesController.text = "";
-              constumeController.text = "";
-
-            }, width: Get.width, height: 50.0),
 
             Consumer<ValueProvider>(
               builder: (context, provider, child){
                 return provider.isLoading == false  ?
                 ButtonWidget(
-                    text: "Add", onClicked: () async{
+                    text: type == "edit" ? "Update" : "Add", onClicked: () async{
 
                   provider.setLoading(true);
-                  final downloadUrl = await imageProvider.uploadImage(imageFile: imageProvider.imageFile);
 
-                  final costumes = CostumeChecklistModel(
-                      id: autoID(),
-                      date: dateController.text.toString().trim(),
-                      image: downloadUrl.toString(),
-                      dancerId: id,
-                      userUID: auth.currentUser!.uid.toString(),
-                      dance: daceController.text.toString().trim(),
-                      accesspries: accesspriesController.text.toString().trim(),
-                      shoes: shoesController.text.toString().trim(),
-                      costume: constumeController.text.toString().trim()
-                  );
 
-                  await CostumeChecklistServices().addCostumeChecklist(costumes, context, id);
+
+                  if(type != "edit"){
+                    if(imageProvider.imageFile !=null){
+                      provider.setLoading(true);
+                      final downloadUrl = await imageProvider.uploadImage(imageFile: imageProvider.imageFile);
+                      final costumes = CostumeChecklistModel(
+                          id: autoID(),
+                          date: dateController.text.toString().trim(),
+                          image: downloadUrl.toString(),
+                          dancerId: id,
+                          userUID: auth.currentUser!.uid.toString(),
+                          dance: daceController.text.toString().trim(),
+                          accesspries: accesspriesController.text.toString().trim(),
+                          shoes: shoesController.text.toString().trim(),
+                          costume: constumeController.text.toString().trim()
+                      );
+
+                      await CostumeChecklistServices().addCostumeChecklist(costumes, context, id);
+                    }else{
+                      showSnackBar(title: "Image Required", subtitle: "");
+                    }
+                  } else{
+                    String? downloadUrl;
+                    if(imageProvider.imageFile != null){
+                      downloadUrl = await imageProvider.uploadImage(imageFile: imageProvider.imageFile);
+                    }else{
+                      downloadUrl = image;
+                    }
+                    final costumes = CostumeChecklistModel(
+                        id: id,
+                        date: dateController.text.toString().trim(),
+                        image: downloadUrl.toString(),
+                        dancerId: dancerID,
+                        userUID: auth.currentUser!.uid.toString(),
+                        dance: daceController.text.toString().trim(),
+                        accesspries: accesspriesController.text.toString().trim(),
+                        shoes: shoesController.text.toString().trim(),
+                        costume: constumeController.text.toString().trim()
+                    );
+
+                    await CostumeChecklistServices().updateCostumeChecklist(costumes, context, id);
+                  }
+
+
                   dateController.text = "";
                   accesspriesController.text = "";
                   daceController.text = "";
                   shoesController.text = "";
                   constumeController.text = "";
                   imageProvider.clear();
+                  Get.back();
                 }, width: Get.width, height: 50.0) :
                 ButtonLoadingWidget(
                     loadingMesasge: "saving",
