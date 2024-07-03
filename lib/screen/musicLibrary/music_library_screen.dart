@@ -19,6 +19,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constant.dart';
 import '../../model/constumeChecklist/costume_checklist_model.dart';
 import '../../provider/dancer/dancer_provider.dart';
+import '../../provider/user/user_provider.dart';
 
 class MusicLibraryScreen extends StatelessWidget {
 
@@ -29,6 +30,7 @@ class MusicLibraryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserProvider>(context,listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -42,7 +44,7 @@ class MusicLibraryScreen extends StatelessWidget {
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.music_library,fit: BoxFit.cover,),
+                  child: ImageLoaderWidget(imageUrl: provider.musicLibrary.toString(),),
                 ),
               ),
              const SizedBox(height: 20.0,),

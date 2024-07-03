@@ -19,12 +19,14 @@ import 'package:provider/provider.dart';
 
 import '../../constant.dart';
 import '../../provider/dancer/dancer_provider.dart';
+import '../../provider/user/user_provider.dart';
 
 class TravelDetailsScreen extends StatelessWidget {
   TravelDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserProvider>(context,listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -38,7 +40,7 @@ class TravelDetailsScreen extends StatelessWidget {
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.travel,fit: BoxFit.cover,),
+                  child: ImageLoaderWidget(imageUrl: provider.travelDetails.toString(),),
                 ),
               ),
               SizedBox(height: 20.0,),

@@ -14,7 +14,9 @@ import 'package:mom_dance/services/skillGoal/skill_goall_services.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
+import '../../helper/image_loader_widget.dart';
 import '../../provider/dancer/dancer_provider.dart';
+import '../../provider/user/user_provider.dart';
 
 class SkiillGoalScreen extends StatelessWidget {
   SkiillGoalScreen({super.key});
@@ -24,7 +26,7 @@ class SkiillGoalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    final arguments = Get.arguments as Map<String, dynamic>? ?? {};
-
+   final provider = Provider.of<UserProvider>(context,listen: false);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -37,7 +39,7 @@ class SkiillGoalScreen extends StatelessWidget {
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.skill_goal,fit: BoxFit.cover,),
+                  child: ImageLoaderWidget(imageUrl: provider.skillGoals.toString(),),
                 ),
               ),
               SizedBox(height: 20.0,),

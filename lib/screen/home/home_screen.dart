@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<UserProvider>(context,listen: false).fetchUserProfile();
+    Provider.of<UserProvider>(context,listen: false).fetchBannerImages();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -65,13 +66,18 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
 
-                Container(
-                  padding: EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    gradient: gradientColor,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Center(child: TextWidget(text: AppString.home_text,size: 18.0,color: Colors.white,textAlignment: TextAlign.center,)),
+                Consumer<UserProvider>(
+                 builder: (context, provider, child){
+
+                   return Container(
+                     padding: EdgeInsets.all(20.0),
+                     decoration: BoxDecoration(
+                       gradient: gradientColor,
+                       borderRadius: BorderRadius.circular(20.0),
+                     ),
+                     child: Center(child: TextWidget(text: provider.homeText.toString(),size: 18.0,color: Colors.white,textAlignment: TextAlign.center,)),
+                   );
+                 },
                 ),
 
                 // menu

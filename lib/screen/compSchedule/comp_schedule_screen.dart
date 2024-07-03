@@ -14,13 +14,16 @@ import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
+import '../../helper/image_loader_widget.dart';
 import '../../provider/dancer/dancer_provider.dart';
+import '../../provider/user/user_provider.dart';
 
 class CompScheduleScreen extends StatelessWidget {
   CompScheduleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserProvider>(context,listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -34,7 +37,7 @@ class CompScheduleScreen extends StatelessWidget {
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.comp_schedule,fit: BoxFit.cover,),
+                  child: ImageLoaderWidget(imageUrl: provider.compSchedule.toString(),),
                 ),
               ),
               SizedBox(height: 20.0,),

@@ -14,7 +14,9 @@ import 'package:mom_dance/res/appString/app_string.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
+import '../../helper/image_loader_widget.dart';
 import '../../provider/dancer/dancer_provider.dart';
+import '../../provider/user/user_provider.dart';
 
 class ClassScheduleScreen extends StatelessWidget {
   ClassScheduleScreen({super.key});
@@ -24,6 +26,7 @@ class ClassScheduleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    final arguments = Get.arguments as Map<String, dynamic>? ?? {};
+   final classProvider = Provider.of<UserProvider>(context,listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -39,7 +42,7 @@ class ClassScheduleScreen extends StatelessWidget {
                     height: Get.width * 0.450,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
-                      child: Image.asset(AppAssets.glass_schedule,fit: BoxFit.cover,),
+                      child: ImageLoaderWidget(imageUrl: classProvider.classSchedule.toString(),),
                     ),
                   ),
                   SizedBox(height: 20.0,),

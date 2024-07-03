@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import '../../constant.dart';
 import '../../model/constumeChecklist/costume_checklist_model.dart';
 import '../../provider/dancer/dancer_provider.dart';
+import '../../provider/user/user_provider.dart';
 
 class CostumeChecklistScreen extends StatelessWidget {
   CostumeChecklistScreen({super.key});
@@ -25,7 +26,7 @@ class CostumeChecklistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    final arguments = Get.arguments as Map<String, dynamic>? ?? {};
-
+   final provider = Provider.of<UserProvider>(context,listen: false);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -38,7 +39,7 @@ class CostumeChecklistScreen extends StatelessWidget {
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.costume_checklist,fit: BoxFit.cover,),
+                  child: ImageLoaderWidget(imageUrl: provider.costumeChecklist.toString(),)
                 ),
               ),
               SizedBox(height: 20.0,),

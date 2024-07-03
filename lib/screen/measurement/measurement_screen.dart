@@ -10,7 +10,9 @@ import 'package:mom_dance/provider/measurements/measurement_provider.dart';
 import 'package:mom_dance/res/appString/app_string.dart';
 import 'package:provider/provider.dart';
 
+import '../../helper/image_loader_widget.dart';
 import '../../helper/simple_header.dart';
+import '../../provider/user/user_provider.dart';
 import '../../res/appAsset/app_assets.dart';
 class MeasurementScreen extends StatelessWidget {
   const MeasurementScreen({super.key});
@@ -18,6 +20,8 @@ class MeasurementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arguments = Get.arguments as Map<String, dynamic>? ?? {};
+    final provider = Provider.of<UserProvider>(context,listen: false);
+
     final id = arguments['id'] ?? "";
     log("Dancer ID: " + id);
     return Scaffold(
@@ -33,7 +37,7 @@ class MeasurementScreen extends StatelessWidget {
                   height: Get.width * 0.450,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
-                    child: Image.asset(AppAssets.costume_measurement,fit: BoxFit.cover,),
+                    child: ImageLoaderWidget(imageUrl: provider.costumeMeasurements.toString()),
                   ),
                 ),
                 SizedBox(height: 20.0,),

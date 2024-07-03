@@ -3,14 +3,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mom_dance/bottomSheet/comp/comp_bottom_sheet.dart';
+import 'package:mom_dance/helper/image_loader_widget.dart';
 import 'package:mom_dance/helper/simple_header.dart';
 import 'package:mom_dance/helper/text_widget.dart';
 import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
-import 'package:mom_dance/res/appAsset/app_assets.dart';
-import 'package:mom_dance/res/appIcon/app_icons.dart';
+import 'package:mom_dance/provider/user/user_provider.dart';
 import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:provider/provider.dart';
-
 import '../../constant.dart';
 import '../../provider/dancer/dancer_provider.dart';
 
@@ -22,6 +21,7 @@ class CompJournalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    final arguments = Get.arguments as Map<String, dynamic>? ?? {};
+   final provider = Provider.of<UserProvider>(context,listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -35,13 +35,13 @@ class CompJournalScreen extends StatelessWidget {
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(AppAssets.comp_journal,fit: BoxFit.cover,),
+                  child: ImageLoaderWidget(imageUrl: provider.compJournal.toString(),),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               Table(
                 border: TableBorder.all(width: 1.0,color: Colors.black),
-                columnWidths: {
+                columnWidths: const{
                   0 : FlexColumnWidth(1),
                   1 : FlexColumnWidth(1),
                   2 : FlexColumnWidth(1),
@@ -53,37 +53,37 @@ class CompJournalScreen extends StatelessWidget {
                   TableRow(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                             gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Date", size: 10.0,color: Colors.white,))),
                       Container(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Comp", size: 10.0,color: Colors.white))),
                       Container(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Dance", size: 10.0,color: Colors.white))),
                       Container(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Adjuction",color: Colors.white, size: 10.0,maxLine: 1 ,))),
                       Container(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Overall", color: Colors.white,size: 10.0))),
                       Container(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),

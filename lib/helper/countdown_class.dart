@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mom_dance/constant.dart';
 import 'package:mom_dance/helper/text_widget.dart';
@@ -7,6 +9,14 @@ import '../provider/countdown/countdown_provider.dart';
 class CountdownScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final pv = Provider.of<CountdownProvider>(context,listen: false);
+    pv.fetchInitialCountdown();
+    // final duration = countdownProvider.countdownDuration;
+    //
+    // final days = duration.inDays;
+    // final hours = duration.inHours % 24;
+    // final minutes = duration.inMinutes % 60;
+    // final seconds = duration.inSeconds % 60;
     return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -17,12 +27,15 @@ class CountdownScreen extends StatelessWidget {
                 String formatDigit(int digit) {
                   return digit.toString().padLeft(2, '0');
                 }
+                final duration = countdownProvider.countdownDuration;
+                final months = countdownProvider.countdownDuration.inDays ~/ 30;
+                final days = duration.inDays;
+                final hours = duration.inHours % 24;
+                final minutes = duration.inMinutes % 60;
+                final seconds = duration.inSeconds % 60;
 
-                int months = countdownProvider.countdownDuration.inDays ~/ 30;
-                int days = countdownProvider.countdownDuration.inDays % 30;
-                int hours = countdownProvider.countdownDuration.inHours % 24;
-                int minutes = countdownProvider.countdownDuration.inMinutes % 60;
-                int seconds = countdownProvider.countdownDuration.inSeconds % 60;
+
+                log("Months: $months: $days: $hours: $minutes: $seconds");
 
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -64,6 +77,39 @@ class CountdownScreen extends StatelessWidget {
         ),
         SizedBox(height: 8.0),
         TextWidget(text: label, size: 14.0,color: primaryColor,)
+      ],
+    );
+  }
+}
+
+
+class CountdownDisplay extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final countdownProvider = Provider.of<CountdownProvider>(context);
+    final duration = countdownProvider.countdownDuration;
+
+    final days = duration.inDays;
+    final hours = duration.inHours % 24;
+    final minutes = duration.inMinutes % 60;
+    final seconds = duration.inSeconds % 60;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '$days Days, $hours Hours, $minutes Minutes, $seconds Seconds',
+          style: TextStyle(fontSize: 24),
+        ),
+        SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () async {
+            // For testing: setting the countdown to 1 minute from now
+            DateTime endTime = DateTime.now().add(Duration(minutes: 1));
+            await countdownProvider.setCountdownTimestamp(endTime);
+          },
+          child: Text('Start 1 Minute Countdown'),
+        ),
       ],
     );
   }
