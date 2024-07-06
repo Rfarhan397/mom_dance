@@ -80,7 +80,7 @@ class MusiclibraryBottomSheet extends StatelessWidget {
             ),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Name", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Dancer Name", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
             CustomTextField(hintText: type == "edit" ? nameController.text = name  : "name", controller: nameController),
 

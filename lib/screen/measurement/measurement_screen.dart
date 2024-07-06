@@ -31,7 +31,7 @@ class MeasurementScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-               const SimpleHeader(text: "Measurement"),
+               const SimpleHeader(text: "Costume Measurements"),
                 Container(
                   width: Get.width,
                   height: Get.width * 0.450,
@@ -43,7 +43,8 @@ class MeasurementScreen extends StatelessWidget {
                 SizedBox(height: 20.0,),
                 Row(
                   children: [
-                    Expanded(child: Image.asset(AppAssets.body)),
+                    Expanded(
+                        child: Image.asset(AppAssets.body)),
                     SizedBox(width: 10.0,),
                     Expanded(
                         flex: 2,
@@ -86,7 +87,7 @@ class BodyDiagram extends StatelessWidget {
              DataBox(
                  title: 'Bust/Chest',
                  name: provider.belli,
-                 desc: AppString.girth_text,
+                 desc: AppString.bust_text,
                  press: (){
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_belli.toString(),));
                  }
@@ -96,7 +97,7 @@ class BodyDiagram extends StatelessWidget {
              DataBox(
                  title: 'Waist',
                  name: provider.leg,
-                 desc: AppString.girth_text,
+                 desc: AppString.waist_text,
                  press: (){
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_leg.toString(),));
                  }
@@ -107,7 +108,7 @@ class BodyDiagram extends StatelessWidget {
              DataBox(
                  title: 'Hips',
                  name: provider.hip,
-                 desc: AppString.girth_text,
+                 desc: AppString.hip_text,
                  press: (){
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_hip.toString(),));
                  }
@@ -117,7 +118,7 @@ class BodyDiagram extends StatelessWidget {
              DataBox(
                  title: 'Inseam',
                  name: provider.knee,
-                 desc: AppString.girth_text,
+                 desc: AppString.inseam_text,
                  press: (){
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_knee.toString(),));
                  }

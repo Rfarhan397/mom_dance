@@ -85,80 +85,99 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    MenuCard(
-                      image: AppIcons.ic_dancer,
-                      title: 'Dancer',
-                      press: (){
-                        Get.toNamed(RoutesName.dancerScreen);
-                      },
-                    ),
-                    MenuCard(
-                      image: AppIcons.ic_calender,
-                      title: 'Comp Schedules',
-                      press: () {
-                        Get.toNamed(RoutesName.compSchedule);
-                      },
-                    ),
-                    MenuCard(
-                      image: AppIcons.ic_travel,
-                      title: 'Travel Details',
-                      press: () {
-                        Get.toNamed(RoutesName.travelDetailsScreen);
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MenuCard(
-                      image: AppIcons.ic_video,
-                      title: 'Music Library',
-                      press: () {
-                        Get.toNamed(RoutesName.musicLibraryScreen);
-                      },
-                    ),
-                    MenuCard(
-                      image: AppIcons.ic_links,
-                      title: 'Favorite Links',
-                      press: () {
-                        Get.toNamed(RoutesName.favouriteScreen);
-                      },
-                    ),
-                    MenuCard(
-                      image: AppIcons.ic_album,
-                      title: 'Dance Album',
-                      press: () {
-                        Get.toNamed(RoutesName.danceAlbumScreen);
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MenuCard(
-                      image: AppIcons.ic_list,
-                      title: 'Comp Packing List',
-                      press: () {
-                        Get.toNamed(RoutesName.compPackingScreen);
-                      },
-                    ),
-                    MenuCard(
-                      image: AppIcons.ic_offer,
-                      title: 'Special Offers',
-                      press: () {
-                        launchWebUrl(url: 'https://www.dancemomlife.com/');
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_dancer,
+                        title: 'Dancer Profile',
+                        press: (){
+                          Get.toNamed(RoutesName.dancerScreen);
                         },
+                      ),
                     ),
-                    MenuCard(
-                      image: AppIcons.ic_web,
-                      title: 'DanceMomLife.com',
-                      press: () {
-                        launchWebUrl(url: 'https://www.dancemomlife.com/');
-                      },
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_compSchedule,
+                        title: 'Competition Schedules',
+                        press: () {
+                          Get.toNamed(RoutesName.compSchedule);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_travel,
+                        title: 'Travel Details',
+                        press: () {
+                          Get.toNamed(RoutesName.travelDetailsScreen);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.0,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_list,
+                        title: 'Competition Packing List',
+                        press: () {
+                          Get.toNamed(RoutesName.compPackingScreen);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_video,
+                        title: 'Music Library',
+                        press: () {
+                          Get.toNamed(RoutesName.musicLibraryScreen);
+                        },
+                      ),
+                    ),
+
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_album,
+                        title: 'Photo Album',
+                        press: () {
+                          Get.toNamed(RoutesName.danceAlbumScreen);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.0,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_links,
+                        title: 'Favorite Links',
+                        press: () {
+                          Get.toNamed(RoutesName.favouriteScreen);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_offer,
+                        title: 'Special Offers',
+                        press: () {
+                          launchWebUrl(url: 'https://www.dancemomlife.com/');
+                          },
+                      ),
+                    ),
+                    Expanded(
+                      child: MenuCard(
+                        image: AppIcons.ic_web,
+                        title: 'TheDanceMomLife.com',
+                        press: () {
+                          launchWebUrl(url: 'https://www.dancemomlife.com/');
+                        },
+                      ),
                     ),
                   ],
                 ),

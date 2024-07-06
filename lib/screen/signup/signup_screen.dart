@@ -23,6 +23,7 @@ class SignupScreen extends StatelessWidget {
   var nameController = TextEditingController();
   // var phoneController = TextEditingController();
   var emailController = TextEditingController();
+  var lastNameController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmPasswordController = TextEditingController();
 
@@ -60,10 +61,17 @@ class SignupScreen extends StatelessWidget {
                    children: [
                      TextWidget(text: "Sign Up", size: 32, isBold: true,),
                      SizedBox(height: 20.0,),
-                     TextWidget(text: "Full Name", size: 16.0,isBold: true,),
+                     TextWidget(text: "First Name", size: 16.0,isBold: true,),
                      SizedBox(height: 10.0,),
-                     CustomTextField(hintText: "john lewis",
+                     CustomTextField(hintText: "Sara",
                        controller: nameController,
+                       keyboardType: TextInputType.name,),
+
+                     SizedBox(height: 20.0,),
+                     TextWidget(text: "Last Name", size: 16.0,isBold: true,),
+                     SizedBox(height: 10.0,),
+                     CustomTextField(hintText: "Smith",
+                       controller: lastNameController,
                        keyboardType: TextInputType.name,),
 
                      SizedBox(height: 20.0,),
@@ -159,7 +167,9 @@ class SignupScreen extends StatelessWidget {
                                    //  phone: "${phoneProvider.selectedCountryCode..toString()}${phoneController.text.toString()}",
                                      email: emailController.text.toString().trim(),
                                      password: passwordController.text.toString().trim(),
-                                     context: context);
+                                     context: context,
+                                     lastName: lastNameController.text.toString().trim()
+                                 );
                                }else{
                                  showSnackBar(title: "Alert!!!", subtitle: "password must be at least 8 characters");
                                }

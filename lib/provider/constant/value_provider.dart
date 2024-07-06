@@ -36,4 +36,14 @@ class ValueProvider extends ChangeNotifier{
     _selectedTime = picked;
     notifyListeners();
   }
+
+
+  DateTimeRange? _selectedDateRange;
+
+  DateTimeRange? get selectedDateRange => _selectedDateRange;
+
+  void setSelectedDateRange(DateTimeRange dateRange) {
+    _selectedDateRange = dateRange;
+    notifyListeners();
+  }
 }

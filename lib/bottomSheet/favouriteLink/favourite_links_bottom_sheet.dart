@@ -43,7 +43,7 @@ class FavouriteLinksBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Comp Schedule", size: 16.0,color: Colors.white,),
+            TextWidget(text: "Add Favorite Links", size: 16.0,color: Colors.white,),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Name", size: 14.0,color: Colors.white,),
@@ -51,9 +51,9 @@ class FavouriteLinksBottomSheet extends StatelessWidget {
             CustomTextField(hintText: type == "edit" ? nameController.text = name : "name", controller: nameController),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Links", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Link", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: type == "edit" ? linkController.text = link : "Music Url", controller: linkController),
+            CustomTextField(hintText: type == "edit" ? linkController.text = link : "Url link", controller: linkController),
 
 
             SizedBox(height: 40.0,),

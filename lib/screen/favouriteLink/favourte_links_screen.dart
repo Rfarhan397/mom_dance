@@ -32,7 +32,7 @@ class FavourteLinksScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Favourte Links"),
+              SimpleHeader(text: "Favorite Links"),
               SizedBox(height: 20.0,),
 
               Consumer<DancerProvider>(
@@ -47,7 +47,7 @@ class FavourteLinksScreen extends StatelessWidget {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No Favourite Links found'));
+                        return Center(child: Text('No Favorite Links found'));
                       }
 
                       List<FavouriteLinksModel> links = snapshot.data!;
@@ -91,7 +91,7 @@ class FavourteLinksScreen extends StatelessWidget {
                                   TextWidget(text: model.link, size: 12.0,maxLine: 1,),
                                   GestureDetector(
                                     onTap: (){
-                                      launchUrl(url: model.link);
+                                      launchUrl(url: "https://${model.link}");
                                     },
                                     child: Align(
                                       alignment: AlignmentDirectional.topEnd,

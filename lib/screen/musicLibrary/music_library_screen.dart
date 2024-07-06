@@ -38,7 +38,7 @@ class MusicLibraryScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Music Library"),
+              SimpleHeader(text: "Add Music"),
               Container(
                width: Get.width,
                 height: Get.width * 0.450,

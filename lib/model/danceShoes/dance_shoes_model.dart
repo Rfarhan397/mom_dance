@@ -8,6 +8,7 @@ class DanceShoesModel {
   String shoes;
   String brand;
   String size;
+  String color;
 
   DanceShoesModel({
     required this.id,
@@ -16,6 +17,7 @@ class DanceShoesModel {
     required this.shoes,
     required this.brand,
     required this.size,
+    required this.color,
     DateTime? timestamp,
     String? currentDate,
     String? currentTime,
@@ -30,6 +32,7 @@ class DanceShoesModel {
       'userUID': userUID,
       'shoes': shoes,
       'brand': brand,
+      'color': color,
       'size': size,
       'timestamp': timestamp.toIso8601String(),
       'currentDate': currentDate,
@@ -46,6 +49,7 @@ class DanceShoesModel {
         shoes: '',
         brand: '',
         size: '',
+        color: '',
       );
     }
     return DanceShoesModel(
@@ -55,6 +59,7 @@ class DanceShoesModel {
       shoes: map['shoes'] ?? '',
       brand: map['brand'] ?? '',
       size: map['size'] ?? '',
+      color: map['color'] ?? '',
       timestamp: map['timestamp'] != null ? DateTime.parse(map['timestamp']) : DateTime.now(),
       currentDate: map['currentDate'] ?? '',
       currentTime: map['currentTime'] ?? '',

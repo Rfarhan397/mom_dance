@@ -9,6 +9,7 @@ import '../../constant.dart';
 
 class UserProvider with ChangeNotifier {
   String? _name;
+  String? _lastName;
   String? _homeText;
   String? _classSchedule;
   String? _compJournal;
@@ -23,6 +24,7 @@ class UserProvider with ChangeNotifier {
   bool _isLoading = false;
 
   String? get name => _name;
+  String? get lastName => _lastName;
   String? get classSchedule => _classSchedule;
   String? get compJournal => _compJournal;
   String? get compSchedule => _compSchedule;
@@ -49,10 +51,12 @@ class UserProvider with ChangeNotifier {
       final value = await firestore.collection(DbKey.c_users).doc(uid).get();
       if (value.exists) {
         _name = value.get("name").toString();
+        _lastName = value.get(DbKey.k_lastName).toString();
 
         notifyListeners();
       } else {
         _name = "";
+        _lastName = "";
       }
       notifyListeners();
     } catch (e) {

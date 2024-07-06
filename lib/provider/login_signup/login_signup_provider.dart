@@ -17,13 +17,13 @@ class LoginSignupProvider extends ChangeNotifier{
 
   // create user new account
   Future<void> createUserAccount(
-      {required name, required email,required password,required  context}) async {
+      {required name, required email,required password,required lastName, required  context}) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       ).whenComplete((){
-        saveUserAccount(name: name,email: email, password: password,context: context);
+        saveUserAccount(name: name,email: email, password: password,context: context,lastName: lastName);
       });
 
       notifyListeners();
@@ -47,7 +47,7 @@ class LoginSignupProvider extends ChangeNotifier{
 
   // save new user accomt data to database
   Future<void> saveUserAccount(
-      {required name, required email,required password, required context}) async {
+      {required name, required email,required password,required lastName, required context}) async {
     DateTime time = DateTime.now();
     try {
       if(auth.currentUser?.uid!=null){
@@ -56,6 +56,7 @@ class LoginSignupProvider extends ChangeNotifier{
           DbKey.k_name : name,
           DbKey.k_email : email,
           DbKey.k_password : password,
+          DbKey.k_lastName : lastName,
           DbKey.k_userUID : auth.currentUser?.uid.toString(),
           DbKey.k_date : "${time.day}/${time.month}/${time.year}",
           DbKey.k_time : "${time.hour}:${time.minute}",

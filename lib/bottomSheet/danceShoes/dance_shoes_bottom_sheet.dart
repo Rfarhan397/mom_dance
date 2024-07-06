@@ -23,6 +23,7 @@ class DanceShoesBottomSheet extends StatelessWidget {
   var shoesController = TextEditingController();
   var brandController = TextEditingController();
   var sizeController = TextEditingController();
+  var colorController = TextEditingController();
 
 
 
@@ -47,7 +48,7 @@ class DanceShoesBottomSheet extends StatelessWidget {
 
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Shoes", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Dance Genre", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
             CustomTextField(hintText: type == "edit"  ? shoesController.text = shoes : "Shoes", controller: shoesController),
 
@@ -55,6 +56,11 @@ class DanceShoesBottomSheet extends StatelessWidget {
             TextWidget(text: "Brand / Style", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
             CustomTextField(hintText:type == "edit"  ? brandController.text = brand : "brand", controller: brandController),
+
+            SizedBox(height: 20.0,),
+            TextWidget(text: "Color", size: 14.0,color: Colors.white,),
+            SizedBox(height: 10.0,),
+            CustomTextField(hintText:type == "edit"  ? colorController.text = size : "color", controller: colorController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Size", size: 14.0,color: Colors.white,),
@@ -72,6 +78,7 @@ class DanceShoesBottomSheet extends StatelessWidget {
                   shoes: shoesController.text.toString().trim(),
                   brand: brandController.text.toString().trim(),
                   size: sizeController.text.toString().trim(),
+                 color: colorController.text.toString().trim(),
 
               );
 

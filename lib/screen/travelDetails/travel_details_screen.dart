@@ -13,6 +13,7 @@ import 'package:mom_dance/model/compSchedule/comp_schedule_model.dart.dart';
 import 'package:mom_dance/model/travelDetails/travel_details_model.dart.dart';
 import 'package:mom_dance/res/appAsset/app_assets.dart';
 import 'package:mom_dance/res/appIcon/app_icons.dart';
+import 'package:mom_dance/screen/image_view_screen.dart';
 import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:mom_dance/services/travelDetails/travel_details_services.dart';
 import 'package:provider/provider.dart';
@@ -62,13 +63,13 @@ class TravelDetailsScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Comp", size: 12.0,color: Colors.white,))),
+                          child: Center(child: TextWidget(text: "Date", size: 12.0,color: Colors.white,))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Date", size: 12.0,color: Colors.white))),
+                          child: Center(child: TextWidget(text: "Competition", size: 12.0,color: Colors.white))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
@@ -139,10 +140,10 @@ class TravelDetailsScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: Center(child: TextWidget(text: model.comp, size: 10.0,color: Colors.black,))),
+                                          child: Center(child: TextWidget(text: model.date, size: 10.0,color: Colors.black,))),
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: Center(child: TextWidget(text: model.date, size: 10.0,color: Colors.black))),
+                                          child: Center(child: TextWidget(text: model.comp, size: 10.0,color: Colors.black))),
                                       Container(
                                           padding: EdgeInsets.all(5.0),
                                           child: Center(child: TextWidget(text: model.location, size: 10.0,color: Colors.black))),
@@ -178,14 +179,14 @@ class TravelDetailsScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                                 gradient: gradientColor
                             ),
-                            child: Center(child: TextWidget(text: "Registration", size: 12.0,color: Colors.white))),
+                            child: Center(child: TextWidget(text: "Hotel", size: 12.0,color: Colors.white))),
 
                         Container(
                             padding: EdgeInsets.all(5.0),
                             decoration: BoxDecoration(
                                 gradient: gradientColor
                             ),
-                            child: Center(child: TextWidget(text: "Hotel", size: 12.0,color: Colors.white))),
+                            child: Center(child: TextWidget(text: "Registration", size: 12.0,color: Colors.white))),
 
                         Container(
                             padding: EdgeInsets.all(5.0),
@@ -257,16 +258,21 @@ class TravelDetailsScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: Center(child: TextWidget(text: model.registration, size: 10.0,color: Colors.black))),
-
-                                      Container(
-                                          padding: EdgeInsets.all(5.0),
                                           child: Center(child: TextWidget(text: model.hotel, size: 10.0,color: Colors.black))),
 
                                       Container(
-                                          height: 50.0,
                                           padding: EdgeInsets.all(5.0),
-                                          child: Center(child: ImageLoaderWidget(imageUrl: model.confirmationImage,))),
+                                          child: Center(child: TextWidget(text: model.registration, size: 10.0,color: Colors.black))),
+
+                                      GestureDetector(
+                                        onTap: (){
+                                          Get.to(ImageViewScreen(imageUrl: model.confirmationImage));
+                          },
+                                        child: Container(
+                                            height: 50.0,
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Center(child: ImageLoaderWidget(imageUrl: model.confirmationImage,))),
+                                      ),
                                     ]
                                 )
                               ],

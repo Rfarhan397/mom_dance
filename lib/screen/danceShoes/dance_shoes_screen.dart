@@ -60,13 +60,19 @@ class DanceShoesScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Shoes",color: Colors.white, size: 12.0,maxLine: 1 ,))),
+                          child: Center(child: TextWidget(text: "Dance Genre",color: Colors.white, size: 12.0,maxLine: 1 ,))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Brand/Style", color: Colors.white,size: 12.0))),
+                      Container(
+                          padding: EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                              gradient: gradientColor
+                          ),
+                          child: Center(child: TextWidget(text: "Color",color: Colors.white, size: 12.0))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
@@ -141,6 +147,10 @@ class DanceShoesScreen extends StatelessWidget {
                                       Container(
                                           padding: EdgeInsets.all(5.0),
                                           child: Center(child: TextWidget(text: model.size,color: Colors.black, size: 10.0))),
+
+                                      Container(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Center(child: TextWidget(text: model.color,color: Colors.black, size: 10.0))),
                                     ]
                                 )
                               ],

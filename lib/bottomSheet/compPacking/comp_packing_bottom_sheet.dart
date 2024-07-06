@@ -42,12 +42,12 @@ class CompPackingBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Comp Schedule", size: 16.0,color: Colors.white,),
+            TextWidget(text: "Add Competition Packing Item", size: 16.0,color: Colors.white,),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Name", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Item", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: type == "edit" ? nameController.text = name : "name", controller: nameController),
+            CustomTextField(hintText: type == "edit" ? nameController.text = name : "item", controller: nameController),
 
 
             SizedBox(height: 40.0,),

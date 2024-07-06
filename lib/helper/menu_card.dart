@@ -25,7 +25,7 @@ class MenuCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 4.0,),
-          TextWidget(text: title, size: 12.0,isBold: true,)
+          TextWidget(text: title, size: 12.0,isBold: true,textAlignment: TextAlign.center,)
         ],
       ),
     );

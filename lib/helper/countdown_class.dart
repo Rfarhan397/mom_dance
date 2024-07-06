@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mom_dance/constant.dart';
 import 'package:mom_dance/helper/text_widget.dart';
+import 'package:mom_dance/screen/countdown/count_down_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/countdown/countdown_provider.dart';
@@ -20,7 +22,18 @@ class CountdownScreen extends StatelessWidget {
     return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextWidget(text: 'Countdown to next Comp', size: 12.0,color: primaryColor,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextWidget(text: 'Countdown to next Competition', size: 12.0,color: primaryColor,),
+                SizedBox(width: 10.0,),
+                GestureDetector(
+                    onTap: (){
+                      Get.to(SetCountdownScreen());
+                    },
+                    child: Icon(Icons.edit,color: primaryColor,))
+              ],
+            ),
             SizedBox(height: 10),
             Consumer<CountdownProvider>(
               builder: (context, countdownProvider, child) {

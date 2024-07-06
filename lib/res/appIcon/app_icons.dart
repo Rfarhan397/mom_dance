@@ -2,6 +2,7 @@ class AppIcons{
   static const ic_password_visible = "assets/icons/ic_password_visible.webp";
   static const ic_album = "assets/icons/ic_album.png";
   static const ic_calender = "assets/icons/ic_calender.png";
+  static const ic_compSchedule = "assets/icons/ic_comp_schedule.png";
   static const ic_dancer = "assets/icons/ic_dancer.png";
   static const ic_links = "assets/icons/ic_links.png";
   static const ic_list = "assets/icons/ic_list.png";

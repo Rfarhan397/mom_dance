@@ -68,12 +68,12 @@ class TravelDetailsBottomSheet extends StatelessWidget {
               builder: (context, provider, child){
                 return CustomTextField(
                     callback: (){
-                      selectDateFun(context,_selectedDate);
+                      selectDateRangeFun(context);
                     },
                     radius: 15.0,
-                    hintText: provider.selectedDate == null ?
+                    hintText: provider.selectedDateRange == null ?
                     type == "edit" ? dateController.text = date  : "Select Date" :
-                    dateController.text = "${provider.selectedDate.day}/${provider.selectedDate.month}/${provider.selectedDate.year}",
+                    dateController.text = "${formatDateRange(provider.selectedDateRange)}",
                     controller: dateController
                 );
               },
@@ -100,6 +100,8 @@ class TravelDetailsBottomSheet extends StatelessWidget {
             CustomTextField(hintText: type == "edit" ? hotelController.text = hotel  : "hotel", controller: hotelController),
 
             SizedBox(height: 20.0,),
+            TextWidget(text: "Upload snapshot of confirmation here", size: 14.0,color: Colors.white,),
+            SizedBox(height: 10.0,),
             Consumer<ImagePickProvider>(
               builder: (context,provider, child){
                 return GestureDetector(

@@ -29,7 +29,7 @@ class CompJournalScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Comp Journal"),
+              SimpleHeader(text: "Competition Journal"),
               Container(
                width: Get.width,
                 height: Get.width * 0.450,
@@ -63,7 +63,7 @@ class CompJournalScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Comp", size: 10.0,color: Colors.white))),
+                          child: Center(child: TextWidget(text: "Competition", size: 10.0,color: Colors.white))),
                       Container(
                           padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
@@ -75,7 +75,7 @@ class CompJournalScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Adjuction",color: Colors.white, size: 10.0,maxLine: 1 ,))),
+                          child: Center(child: TextWidget(text: "Adjudication",color: Colors.white, size: 10.0,maxLine: 1 ,))),
                       Container(
                           padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
@@ -87,7 +87,7 @@ class CompJournalScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Special",color: Colors.white, size: 10.0))),
+                          child: Center(child: TextWidget(text: "Specialty Award",color: Colors.white, size: 10.0))),
                     ]
                   )
                 ],

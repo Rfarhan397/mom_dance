@@ -25,7 +25,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
             child: Column(
             children: [
 
-              SimpleHeader(text: "Comp Journal"),
+              SimpleHeader(text: "Add Dancer Details"),
               SizedBox(height: 20.0,),
               Container(
                 width: Get.width,
@@ -41,7 +41,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
                children: [
                  CompJournalCard(
                    image: AppAssets.comp_journal,
-                   title: 'Comp Journal',
+                   title: 'Competition Journal',
                    press: () {
                      log("Id: ${dancer.id}");
                      Get.toNamed(RoutesName.compJournalScreen,arguments: {

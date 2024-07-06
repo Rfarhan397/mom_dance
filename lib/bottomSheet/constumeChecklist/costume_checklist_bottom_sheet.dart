@@ -56,7 +56,7 @@ class CostumeChecklistBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: type == "edit" ?  "Update Constume Checklist" : "Add Constume Checklist", size: 16.0,color: Colors.white,isBold: true,),
+            TextWidget(text: type == "edit" ?  "Update Costume" : "Add Costume", size: 16.0,color: Colors.white,isBold: true,),
             SizedBox(height: 20.0,),
 
             Consumer<ImagePickProvider>(
@@ -89,14 +89,16 @@ class CostumeChecklistBottomSheet extends StatelessWidget {
             CustomTextField(hintText:  type == "edit" ? daceController.text = dance : "Dance", controller: daceController),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Accesspries", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
-            CustomTextField(hintText:type == "edit" ? accesspriesController.text = accesspries :  "Accesspries", controller: accesspriesController),
-
-            SizedBox(height: 20.0,),
             TextWidget(text: "Costume", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
             CustomTextField(hintText:type == "edit" ? constumeController.text = costume :  "costume", controller: constumeController),
+
+
+            SizedBox(height: 20.0,),
+            TextWidget(text: "Accessories", size: 14.0,color: Colors.white,),
+            SizedBox(height: 10.0,),
+            CustomTextField(hintText:type == "edit" ? accesspriesController.text = accesspries :  "Accesspries", controller: accesspriesController),
+
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Shoes", size: 14.0,color: Colors.white,),

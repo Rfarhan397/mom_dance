@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:mom_dance/helper/text_widget.dart';
 import 'package:mom_dance/provider/constant/value_provider.dart';
 import 'package:mom_dance/routes/routes_name.dart';
@@ -79,6 +80,81 @@ Future<void> selectDateFun(BuildContext context, DateTime? _selectedDate) async 
     Provider.of<ValueProvider>(context,listen: false).setSelectedDate(picked);
   }
 }
+
+Future<void> selectDateRangeFun(BuildContext context) async {
+  final initialDateRange = Provider.of<ValueProvider>(context, listen: false).selectedDateRange ?? DateTimeRange(
+    start: DateTime.now(),
+    end: DateTime.now().add(Duration(days: 7)),
+  );
+
+  final DateTimeRange? picked = await showDateRangePicker(
+    context: context,
+    initialDateRange: initialDateRange,
+    firstDate: DateTime(1990),
+    lastDate: DateTime(2030),
+  );
+
+  if (picked != null && picked != initialDateRange) {
+    Provider.of<ValueProvider>(context, listen: false).setSelectedDateRange(picked);
+  }
+}
+
+// Future<void> selectDateRangeFun(BuildContext context) async {
+//   final initialDateRange = Provider.of<ValueProvider>(context, listen: false).selectedDateRange ?? DateTimeRange(
+//     start: DateTime.now(),
+//     end: DateTime.now().add(Duration(days: 7)),
+//   );
+//
+//   final DateTimeRange? picked = await showDialog<DateTimeRange>(
+//     context: context,
+//     builder: (context) {
+//       DateTimeRange? tempPickedDateRange = initialDateRange;
+//
+//       return AlertDialog(
+//         title: Text('Select Date Range'),
+//         content: Container(
+//           height: 300,
+//           child: Column(
+//             children: [
+//               DateRangePickerDialog(
+//                 initialDateRange: initialDateRange,
+//                 firstDate: DateTime(1990),
+//                 lastDate: DateTime(2025),
+//               ),
+//             ],
+//           ),
+//         ),
+//         actions: [
+//           TextButton(
+//             onPressed: () {
+//               Navigator.of(context).pop();
+//             },
+//             child: Text('Cancel'),
+//           ),
+//           TextButton(
+//             onPressed: () {
+//               Navigator.of(context).pop(tempPickedDateRange);
+//             },
+//             child: Text('OK'),
+//           ),
+//         ],
+//       );
+//     },
+//   );
+//
+//   if (picked != null && picked != initialDateRange) {
+//     Provider.of<ValueProvider>(context, listen: false).setSelectedDateRange(picked);
+//   }
+// }
+
+String formatDateRange(DateTimeRange? range) {
+  if (range == null) return 'No date range selected.';
+  final DateFormat formatter = DateFormat('MM/dd/yyyy');
+  final String start = formatter.format(range.start);
+  final String end = formatter.format(range.end);
+  return '$start-$end';
+}
+
 
 void showCustomDialog({
   required VoidCallback onDelete,

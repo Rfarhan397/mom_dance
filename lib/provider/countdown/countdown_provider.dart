@@ -26,9 +26,12 @@
 //   }
 // }
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+
+import 'package:mom_dance/constant.dart';
 
 class CountdownProvider with ChangeNotifier {
   Duration countdownDuration = Duration.zero;
@@ -39,8 +42,9 @@ class CountdownProvider with ChangeNotifier {
   }
 
   Future<void> fetchInitialCountdown() async {
+    final auth = FirebaseAuth.instance.currentUser!.uid.toString();
     try {
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('countdowns').doc('timer').get();
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('countdowns').doc(auth).get();
       if (snapshot.exists) {
         Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
         DateTime endTime = (data['endTime'] as Timestamp).toDate();
@@ -55,13 +59,15 @@ class CountdownProvider with ChangeNotifier {
   }
 
   Future<void> setCountdownTimestamp(DateTime endTime) async {
+    final auth = FirebaseAuth.instance.currentUser!.uid.toString();
     try {
       await FirebaseFirestore.instance
           .collection('countdowns')
-          .doc('timer')
+          .doc(auth)
           .set({'endTime': endTime});
       countdownDuration = endTime.difference(DateTime.now());
       _startTimer();
+      fetchInitialCountdown();
       notifyListeners();
     } catch (e) {
       print('Error setting countdown timestamp: $e');

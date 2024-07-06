@@ -1,19 +1,8 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mom_dance/bottomSheet/comp/comp_bottom_sheet.dart';
-import 'package:mom_dance/bottomSheet/compSchedule/comp_schedule_bottom_sheet.dart';
-import 'package:mom_dance/bottomSheet/favouriteLink/favourite_links_bottom_sheet.dart';
 import 'package:mom_dance/helper/simple_header.dart';
-import 'package:mom_dance/helper/text_widget.dart';
-import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/model/compPacking/comp_packing_model.dart';
-import 'package:mom_dance/model/compSchedule/comp_schedule_model.dart.dart';
-import 'package:mom_dance/model/favouriteLink/favourite_links_model.dart';
-import 'package:mom_dance/res/appAsset/app_assets.dart';
-import 'package:mom_dance/res/appIcon/app_icons.dart';
-import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:mom_dance/services/favouriteLink/favourite_links_services.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,7 +24,7 @@ class CompPackingScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Comp Packing List"),
+              SimpleHeader(text: "Competition Packing List"),
               SizedBox(height: 20.0,),
 
               Consumer<DancerProvider>(
@@ -50,7 +39,7 @@ class CompPackingScreen extends StatelessWidget {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No Comp packing List found'));
+                        return Center(child: Text('No Competition packing List found'));
                       }
 
                       List<CompPackingModel> links = snapshot.data!;

@@ -25,6 +25,7 @@ class DbKey{
   static const k_image = "image";
   static const k_userType = "userType";
   static const k_password = "password";
+  static const k_lastName = "lastName";
   static const k_date = "date";
   static const k_time = "time";
   static const k_timestamp = "timestamp";

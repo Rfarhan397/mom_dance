@@ -79,7 +79,7 @@ class CostumeChecklistScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Accesspries",color: Colors.white, size: 10.0,maxLine: 1 ,))),
+                          child: Center(child: TextWidget(text: "Accessories",color: Colors.white, size: 10.0,maxLine: 1 ,))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
