@@ -10,6 +10,7 @@ import 'package:mom_dance/helper/text_widget.dart';
 import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/res/appAsset/app_assets.dart';
 import 'package:mom_dance/res/appIcon/app_icons.dart';
+import 'package:mom_dance/screen/image_view_screen.dart';
 import 'package:mom_dance/services/costumeChecklist/costume_checklist_services.dart';
 import 'package:provider/provider.dart';
 
@@ -148,11 +149,16 @@ class CostumeChecklistScreen extends StatelessWidget {
                               children: [
                                 TableRow(
                                     children: [
-                                      Container(
-                                        width: 100.0,
-                                          height: 100.0,
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Center(child: ImageLoaderWidget(imageUrl: model.image,))),
+                                      GestureDetector(
+                                        onTap: (){
+                                          Get.to(ImageViewScreen(imageUrl: model.image));
+                                        },
+                                        child: Container(
+                                          width: 100.0,
+                                            height: 100.0,
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Center(child: ImageLoaderWidget(imageUrl: model.image,))),
+                                      ),
                                       Container(
                                           padding: EdgeInsets.all(5.0),
                                           child: Center(child: TextWidget(text: model.dance, size: 10.0,color: Colors.black))),

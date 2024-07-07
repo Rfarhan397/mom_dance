@@ -11,10 +11,14 @@ class ImageViewScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BackButtonWidget(),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: BackButtonWidget(),
+            ),
 
+            SizedBox(height: 20.0,),
             Center(
               child: ImageLoaderWidget(imageUrl: imageUrl,),
             ),

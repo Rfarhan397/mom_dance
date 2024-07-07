@@ -80,7 +80,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
             ),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Comp", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Competition", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
             CustomTextField(hintText:type == "edit" ? compController.text = comp  : "comp", controller: compController),
 
@@ -90,9 +90,9 @@ class TravelDetailsBottomSheet extends StatelessWidget {
             CustomTextField(hintText: type == "edit" ? locationController.text = location  : "location", controller: locationController),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Registration", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Confirmation No", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText:type == "edit" ? registrationController.text = registration  : "registration", controller: registrationController),
+            CustomTextField(hintText:type == "edit" ? registrationController.text = registration  : "confirmation no", controller: registrationController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Hotel", size: 14.0,color: Colors.white,),

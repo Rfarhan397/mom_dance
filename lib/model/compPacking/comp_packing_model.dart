@@ -5,11 +5,13 @@ class CompPackingModel {
   String currentDate;
   String currentTime;
   String name;
+  bool isMarked;
 
   CompPackingModel({
     required this.id,
     required this.userUID,
     required this.name,
+    this.isMarked = false,
     DateTime? timestamp,
     String? currentDate,
     String? currentTime,
@@ -25,6 +27,7 @@ class CompPackingModel {
       'timestamp': timestamp.toIso8601String(),
       'currentDate': currentDate,
       'currentTime': currentTime,
+      'isMarked': isMarked,
     };
   }
 
@@ -40,6 +43,7 @@ class CompPackingModel {
       id: map['id'] ?? '',
       userUID: map['userUID'] ?? '',
       name: map['name'] ?? '',
+      isMarked: map['isMarked'] ?? false,
       timestamp: map['timestamp'] != null ? DateTime.parse(map['timestamp']) : DateTime.now(),
       currentDate: map['currentDate'] ?? '',
       currentTime: map['currentTime'] ?? '',

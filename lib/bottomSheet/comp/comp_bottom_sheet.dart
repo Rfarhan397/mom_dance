@@ -74,9 +74,9 @@ class CompBottomSheet extends StatelessWidget {
               },
             ),
             SizedBox(height: 20.0,),
-            TextWidget(text: "Comp", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Competition", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: type == "edit" ? compController.text = comp : "comp", controller: compController),
+            CustomTextField(hintText: type == "edit" ? compController.text = comp : "Competition", controller: compController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Dance", size: 14.0,color: Colors.white,),
@@ -84,9 +84,9 @@ class CompBottomSheet extends StatelessWidget {
             CustomTextField(hintText: type == "edit" ? daceController.text = dance : "Dance", controller: daceController),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Adjuction", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Adjudication", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText:type == "edit" ? adjuctionController.text = adjuction :   "adjuction", controller: adjuctionController),
+            CustomTextField(hintText:type == "edit" ? adjuctionController.text = adjuction :   "adjudication", controller: adjuctionController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Overall", size: 14.0,color: Colors.white,),

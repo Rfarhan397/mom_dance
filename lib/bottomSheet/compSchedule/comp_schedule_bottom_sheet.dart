@@ -39,7 +39,7 @@ class CompScheduleBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Comp Schedule", size: 16.0,color: Colors.white,),
+            TextWidget(text: "Add Competition Schedule", size: 16.0,color: Colors.white,),
             SizedBox(height: 20.0,),
             TextWidget(text: "Date", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
@@ -47,20 +47,20 @@ class CompScheduleBottomSheet extends StatelessWidget {
               builder: (context, provider, child){
                 return CustomTextField(
                     callback: (){
-                      selectDateFun(context,_selectedDate);
+                      selectDateRangeFun(context);
                     },
                     radius: 15.0,
-                    hintText: provider.selectedDate == null ?
+                    hintText: provider.selectedDateRange == null ?
                     "Select Date" :
-                    dateController.text = "${provider.selectedDate.day}/${provider.selectedDate.month}/${provider.selectedDate.year}",
+                    dateController.text = "${formatDateRange(provider.selectedDateRange)}",
                     controller: dateController
                 );
               },
             ),
             SizedBox(height: 20.0,),
-            TextWidget(text: "Comp", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Competition", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "comp", controller: compController),
+            CustomTextField(hintText: "Competition", controller: compController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Location", size: 14.0,color: Colors.white,),

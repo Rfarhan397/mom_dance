@@ -90,8 +90,8 @@ class FavourteLinksScreen extends StatelessWidget {
                                   SizedBox(height: 5.0,),
                                   TextWidget(text: model.link, size: 12.0,maxLine: 1,),
                                   GestureDetector(
-                                    onTap: (){
-                                      launchUrl(url: "https://${model.link}");
+                                    onTap: () async{
+                                     launchWebUrl(url: "https://${model.link}");
                                     },
                                     child: Align(
                                       alignment: AlignmentDirectional.topEnd,
@@ -124,10 +124,16 @@ class FavourteLinksScreen extends StatelessWidget {
     );
   }
 
-  Future<void> launchUrl({String? url}) async {
-    if (await canLaunch(url!)) {
-      await launch(url);
-    } else {
+  // Future<void> _launchURL(String url) async {
+  //   final Uri uri = Uri.parse(url);
+  //   if (!await launchUrl(uri)) {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
+
+  Future<void> launchWebUrl({required String url}) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
   }

@@ -44,5 +44,10 @@ class DbKey{
   static const k_lastUpdate = "lastUpdate";
   static const k_sunday = "sunday";
   static const k_monday = "monday";
+  static const k_tuesday = "tuesday";
+  static const k_wednesday = "wednesday";
+  static const k_thursday = "thursday";
+  static const k_friday = "friday";
+  static const k_saturday = "saturday";
 
 }

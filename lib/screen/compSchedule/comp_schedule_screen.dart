@@ -31,7 +31,7 @@ class CompScheduleScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Comp Schedule"),
+              SimpleHeader(text: "Competition Schedule"),
               Container(
                width: Get.width,
                 height: Get.width * 0.450,
@@ -59,7 +59,7 @@ class CompScheduleScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Comp", size: 12.0,color: Colors.white,))),
+                          child: Center(child: TextWidget(text: "Competition", size: 12.0,color: Colors.white,))),
                       Container(
                           padding: EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
@@ -88,7 +88,7 @@ class CompScheduleScreen extends StatelessWidget {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No Comp Schedule found'));
+                        return Center(child: Text('No Competition Schedule found'));
                       }
 
                       List<CompScheduleModel> compSchedule = snapshot.data!;

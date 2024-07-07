@@ -14,6 +14,7 @@ import '../../constant.dart';
 import '../../helper/custom_textfield.dart';
 import '../../helper/simple_button_widget.dart';
 import '../../helper/text_widget.dart';
+import '../../provider/compPacking/packing_provider.dart';
 import '../../provider/constant/value_provider.dart';
 class CompPackingBottomSheet extends StatelessWidget {
   String name,type,packID;
@@ -63,6 +64,8 @@ class CompPackingBottomSheet extends StatelessWidget {
               if(type == "edit"){
                 await FavouriteLinksServices().addCompPacking(compPacking, context);
               }else{
+                await Provider.of<PackingProvider>(context, listen: false)
+                    .addCompPacking(compPacking);
                 await FavouriteLinksServices().addCompPacking(compPacking, context);
               }
 

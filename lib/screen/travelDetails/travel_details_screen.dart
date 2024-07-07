@@ -186,14 +186,14 @@ class TravelDetailsScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                                 gradient: gradientColor
                             ),
-                            child: Center(child: TextWidget(text: "Registration", size: 12.0,color: Colors.white))),
+                            child: Center(child: TextWidget(text: "Confirmation", size: 12.0,color: Colors.white))),
 
                         Container(
                             padding: EdgeInsets.all(5.0),
                             decoration: BoxDecoration(
                                 gradient: gradientColor
                             ),
-                            child: Center(child: TextWidget(text: "Confirmation", size: 12.0,color: Colors.white))),
+                            child: Center(child: TextWidget(text: "Photo", size: 12.0,color: Colors.white))),
                       ]
                   )
                 ],

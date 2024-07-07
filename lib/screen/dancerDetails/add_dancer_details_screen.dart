@@ -25,7 +25,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
             child: Column(
             children: [
 
-              SimpleHeader(text: "Add Dancer Details"),
+              SimpleHeader(text: dancer.name.toString()),
               SizedBox(height: 20.0,),
               Container(
                 width: Get.width,

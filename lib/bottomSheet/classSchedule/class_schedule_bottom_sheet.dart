@@ -18,8 +18,14 @@ class ClassScheduleBottomSheet extends StatelessWidget {
 
   var sundayController = TextEditingController();
   var mondayController = TextEditingController();
+  var tuesdayController = TextEditingController();
+  var wednesdayController = TextEditingController();
+  var thursdayController = TextEditingController();
+  var fridayController = TextEditingController();
+  var saturdayController = TextEditingController();
 
-   @override
+
+  @override
   Widget build(BuildContext context) {
      final provider = Provider.of<ClassScheduleProvider>(context,listen: false);
      provider.getClassSchedule(id: id);
@@ -38,7 +44,7 @@ class ClassScheduleBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Comp Journal", size: 16.0,color: Colors.white,),
+            TextWidget(text: "Add Dance Schedule", size: 16.0,color: Colors.white,),
 
 
             SizedBox(height: 20.0,),
@@ -51,13 +57,45 @@ class ClassScheduleBottomSheet extends StatelessWidget {
             SizedBox(height: 10.0,),
             CustomTextField(hintText: "Monday", controller: mondayController),
 
+            SizedBox(height: 20.0,),
+            TextWidget(text: "Tuesday", size: 14.0,color: Colors.white,),
+            SizedBox(height: 10.0,),
+            CustomTextField(hintText: "Tuesday", controller: tuesdayController),
+
+            SizedBox(height: 20.0,),
+            TextWidget(text: "Wednesday", size: 14.0,color: Colors.white,),
+            SizedBox(height: 10.0,),
+            CustomTextField(hintText: "Wednesday", controller: wednesdayController),
+
+            SizedBox(height: 20.0,),
+            TextWidget(text: "Thursday", size: 14.0,color: Colors.white,),
+            SizedBox(height: 10.0,),
+            CustomTextField(hintText: "Thursday", controller: thursdayController),
+
+            SizedBox(height: 20.0,),
+            TextWidget(text: "Friday", size: 14.0,color: Colors.white,),
+            SizedBox(height: 10.0,),
+            CustomTextField(hintText: "Friday", controller: fridayController),
+
+
+            SizedBox(height: 20.0,),
+            TextWidget(text: "Saturday", size: 14.0,color: Colors.white,),
+            SizedBox(height: 10.0,),
+            CustomTextField(hintText: "Saturday", controller: saturdayController),
+
             SizedBox(height: 40.0,),
             SimpleButtonWidget(text: "Add", onClicked: () async{
 
               await provider.saveClassSchedule(
                   id: id,
                   sunday: sundayController.text.toString().trim(),
-                  monday: mondayController.text.toString().trim());
+                  monday: mondayController.text.toString().trim(),
+                  tuesday: tuesdayController.text.toString().trim(),
+                  wednesday: wednesdayController.text.toString().trim(),
+                 thursday: thursdayController.text.toString().trim(),
+                 friday: fridayController.text.toString().trim(),
+                 saturday: saturdayController.text.toString().trim(),
+              );
               provider.getClassSchedule(id: id);
               Get.back();
 

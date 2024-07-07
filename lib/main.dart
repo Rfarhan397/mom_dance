@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mom_dance/constant.dart';
 import 'package:mom_dance/provider/classSchedulle/class_schedule_provider.dart';
+import 'package:mom_dance/provider/compPacking/packing_provider.dart';
 import 'package:mom_dance/provider/constant/password_visible_provider.dart';
 import 'package:mom_dance/provider/constant/value_provider.dart';
 import 'package:mom_dance/provider/countdown/countdown_provider.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MeasurementProvider()),
         ChangeNotifierProvider(create: (_) => ClassScheduleProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => PackingProvider()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
