@@ -57,37 +57,37 @@ class CompJournalScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Date", size: 10.0,color: Colors.white,))),
+                          child: Center(child: TextWidget(text: "Date", size: 8.0,color: Colors.white,))),
                       Container(
                           padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Competition", size: 10.0,color: Colors.white))),
+                          child: Center(child: TextWidget(text: "Competition", size: 8.0,color: Colors.white))),
                       Container(
                           padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Dance", size: 10.0,color: Colors.white))),
+                          child: Center(child: TextWidget(text: "Dance", size: 8.0,color: Colors.white))),
                       Container(
                           padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Adjudication",color: Colors.white, size: 10.0,maxLine: 1 ,))),
+                          child: Center(child: TextWidget(text: "Adjudication",color: Colors.white, size: 8.0,maxLine: 1 ,))),
                       Container(
                           padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Overall", color: Colors.white,size: 10.0))),
+                          child: Center(child: TextWidget(text: "Overall", color: Colors.white,size: 8.0))),
                       Container(
                           padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Specialty Award",color: Colors.white, size: 10.0))),
+                          child: Center(child: TextWidget(text: "Specialty Award",color: Colors.white, size: 8.0))),
                     ]
                   )
                 ],

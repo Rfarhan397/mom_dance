@@ -19,7 +19,8 @@ import '../../provider/dancer/dancer_provider.dart';
 import '../../provider/user/user_provider.dart';
 
 class CompScheduleScreen extends StatelessWidget {
-  CompScheduleScreen({super.key});
+  CompScheduleScreen({super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -104,11 +105,19 @@ class CompScheduleScreen extends StatelessWidget {
 
                               showCustomDialog(
                                   isThird: false,
-                                  isSecond: false,
+                                  isSecond: true,
                                   onDelete: () async{
                               await  CompJournalServices().deleteCompSchedule(model.id, context);
                               Get.back();
-                              }, onDetails: (){}, onEdit: (){});
+                              }, onDetails: (){}, onEdit: (){
+                                Get.bottomSheet(CompScheduleBottomSheet(
+                                  type: "edit",
+                                  id: model.id,
+                                  competition: model.comp,
+                                  location: model.location,
+                                  date: model.date,
+                                ));
+                              });
                             },
                             child: Table(
                               border: TableBorder.all(width: 1.0,color: Colors.black),

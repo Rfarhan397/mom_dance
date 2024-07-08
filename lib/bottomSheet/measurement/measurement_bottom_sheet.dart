@@ -34,13 +34,13 @@ class MeasurementBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Measurements", size: 16.0,color: Colors.white,),
+            TextWidget(text: "Add Measurements", size: 16.0,color: Colors.white,),
             SizedBox(height: 20.0,),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Add Measurements", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Details", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Add Measurements", controller: detailsController),
+            CustomTextField(hintText: "add details", controller: detailsController),
 
             SizedBox(height: 40.0,),
             SimpleButtonWidget(text: "Add", onClicked: () async{

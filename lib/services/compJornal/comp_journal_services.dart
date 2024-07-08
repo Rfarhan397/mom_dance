@@ -74,6 +74,19 @@ class CompJournalServices {
     });
   }
 
+  Future<void> updateCompSchedule(CompScheduleModel compSchedule,BuildContext context) async {
+    await _db
+        .collection(DbKey.c_compSchedule)
+        .doc(compSchedule.id)
+        .update(compSchedule.toMap())
+        .whenComplete((){
+      showSnackBar(title: "Comp updated", subtitle: "");
+      // Provider.of<ImagePickProvider>(context,listen: false).clear();
+      Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+      Navigator.pop(context);
+    });
+  }
+
 
   Future<void> deleteCompSchedule(String id,BuildContext context) async {
     await _db

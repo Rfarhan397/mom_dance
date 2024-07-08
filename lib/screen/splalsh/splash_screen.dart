@@ -13,16 +13,16 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<UserProvider>(context,listen: false).fetchBannerImages();
-    Timer(const Duration(seconds: 4),(){
-    //  Get.offAllNamed(RoutesName.loginScreen);
-      if(auth.currentUser !=null ){
-        Get.offAllNamed(RoutesName.homeScreen);
-      }else{
-        Get.offAllNamed(RoutesName.loginScreen);
-      }
-
-    });
+    // Provider.of<UserProvider>(context,listen: false).fetchBannerImages();
+    // Timer(const Duration(seconds: 4),(){
+    // //  Get.offAllNamed(RoutesName.loginScreen);
+    //   if(auth.currentUser !=null ){
+    //     Get.offAllNamed(RoutesName.homeScreen);
+    //   }else{
+    //     Get.offAllNamed(RoutesName.loginScreen);
+    //   }
+    //
+    // });
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
