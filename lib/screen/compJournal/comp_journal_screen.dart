@@ -14,17 +14,16 @@ import '../../constant.dart';
 import '../../provider/dancer/dancer_provider.dart';
 
 class CompJournalScreen extends StatelessWidget {
-  CompJournalScreen({super.key});
+   CompJournalScreen({super.key});
 
   var dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final arguments = Get.arguments as Map<String, dynamic>? ?? {};
-    final provider = Provider.of<UserProvider>(context,listen: false);
+   final arguments = Get.arguments as Map<String, dynamic>? ?? {};
+   final provider = Provider.of<UserProvider>(context,listen: false);
 
     return Scaffold(
-      backgroundColor: lightGrey,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -32,7 +31,7 @@ class CompJournalScreen extends StatelessWidget {
             children: [
               SimpleHeader(text: "Competition Journal"),
               Container(
-                width: Get.width,
+               width: Get.width,
                 height: Get.width * 0.450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
@@ -40,144 +39,154 @@ class CompJournalScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20.0,),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  // borderRadius: BorderRadius.circular(20.0),
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.black.withOpacity(0.1),
-                  //     spreadRadius: 1,
-                  //     blurRadius: 1,
-                  //     offset: Offset(0, 1), // changes position of shadow
-                  //   ),
-                  // ],
-                ),
-                margin: EdgeInsets.only(bottom: 5.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            gradient: gradientColor,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Date", size: 12.0,color: Colors.white,)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Competition", size: 12.0,color: Colors.white)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Dance", size: 12.0,color: Colors.white)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Adjudication",color: Colors.white, size: 12.0,maxLine: 1 ,)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Overall", color: Colors.white,size: 12.0)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Specialty Award",color: Colors.white, size: 12.0)),
+              Table(
+                border: TableBorder.all(width: 1.0,color: Colors.black),
+                columnWidths: const{
+                  0 : FlexColumnWidth(1),
+                  1 : FlexColumnWidth(1),
+                  2 : FlexColumnWidth(1),
+                  3 : FlexColumnWidth(1),
+                  4 : FlexColumnWidth(1),
+                  5 : FlexColumnWidth(1),
+                },
+                children: [
+                  TableRow(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            gradient: gradientColor
+                          ),
+                          child: Center(child: TextWidget(text: "Date", size: 8.0,color: Colors.white,))),
+                      Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                              gradient: gradientColor
+                          ),
+                          child: Center(child: TextWidget(text: "Competition", size: 8.0,color: Colors.white))),
+                      Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                              gradient: gradientColor
+                          ),
+                          child: Center(child: TextWidget(text: "Dance", size: 8.0,color: Colors.white))),
+                      Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                              gradient: gradientColor
+                          ),
+                          child: Center(child: TextWidget(text: "Adjudication",color: Colors.white, size: 8.0,maxLine: 1 ,))),
+                      Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                              gradient: gradientColor
+                          ),
+                          child: Center(child: TextWidget(text: "Overall", color: Colors.white,size: 8.0))),
+                      Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                              gradient: gradientColor
+                          ),
+                          child: Center(child: TextWidget(text: "Specialty Award",color: Colors.white, size: 8.0))),
+                    ]
+                  )
+                ],
+              ),
+              Consumer<DancerProvider>(
+                builder: (context, productProvider, child) {
+                  return StreamBuilder<List<CompJournalModel>>(
+                    stream: productProvider.getCompJournal(dancerID: arguments['id'] ?? ""),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return Center(child: Text('No Comp Journal found'));
+                      }
 
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child:  Consumer<DancerProvider>(
-                      builder: (context, productProvider, child) {
-                        return StreamBuilder<List<CompJournalModel>>(
-                          stream: productProvider.getCompJournal(dancerID: arguments['id'] ?? ""),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.waiting) {
-                              return Center(child: CircularProgressIndicator());
-                            }
-                            if (snapshot.hasError) {
-                              return Center(child: Text('Error: ${snapshot.error}'));
-                            }
-                            if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                              return Center(child: Text('No Comp Journal found'));
-                            }
+                      List<CompJournalModel> compJournal = snapshot.data!;
+                      return ListView.builder(
+                        itemCount: compJournal.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                         CompJournalModel model = compJournal[index];
+                         log("message${model.date}");
+                          return  GestureDetector(
+                            onTap: (){
+                              showCustomDialog(onDelete: () async{
+                                await CompJournalServices().deleteCompJournal(
+                                  id: model.id.toString(),
+                                  dancerID: model.dancerId.toString(),
+                                  context: context
+                                );
+                               Navigator.pop(context);
+                              },
+                                  onDetails: (){},
+                                  isThird: false,
+                                  onEdit: (){
+                                    Navigator.pop(context);
+                                    Get.bottomSheet(CompBottomSheet(
+                                      id: model.id,
+                                      comp: model.comp,
+                                      dance: model.dance,
+                                      adjuction: model.adjuction,
+                                      overAll: model.overAll,
+                                      special: model.special,
+                                      date: model.date,
+                                      compID: model.id,
+                                      dancerID: model.dancerId,
+                                      type: 'edit',
+                                    ));
+                                  }
+                              );
 
-                            List<CompJournalModel> compJournal = snapshot.data!;
-                            return ListView.builder(
-                              itemCount: compJournal.length,
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                CompJournalModel model = compJournal[index];
-                                log("message${model.date}");
-                                return  GestureDetector(
-                                  onTap: (){
-                                    showCustomDialog(onDelete: () async{
-                                      await CompJournalServices().deleteCompJournal(
-                                          id: model.id.toString(),
-                                          dancerID: model.dancerId.toString(),
-                                          context: context
-                                      );
-                                      Navigator.pop(context);
-                                    },
-                                        onDetails: (){},
-                                        isThird: false,
-                                        onEdit: (){
-                                          Navigator.pop(context);
-                                          Get.bottomSheet(CompBottomSheet(
-                                            id: model.id,
-                                            comp: model.comp,
-                                            dance: model.dance,
-                                            adjuction: model.adjuction,
-                                            overAll: model.overAll,
-                                            special: model.special,
-                                            date: model.date,
-                                            compID: model.id,
-                                            dancerID: model.dancerId,
-                                            type: 'edit',
-                                          ));
-                                        }
-                                    );
-
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                            },
+                            child: Table(
+                              border: TableBorder.all(width: 1.0,color: Colors.black),
+                              columnWidths: {
+                                0 : FlexColumnWidth(1),
+                                1 : FlexColumnWidth(1),
+                                2 : FlexColumnWidth(1),
+                                3 : FlexColumnWidth(1),
+                                4 : FlexColumnWidth(1),
+                                5 : FlexColumnWidth(1),
+                              },
+                              children: [
+                                TableRow(
                                     children: [
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: TextWidget(text: model.date, size: 12.0,color: Colors.black,textAlignment: TextAlign.start,)),
+                                          child: Center(child: TextWidget(text: model.date, size: 10.0,color: Colors.black,))),
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: TextWidget(text: model.comp, size: 12.0,color: Colors.black)),
+                                          child: Center(child: TextWidget(text: model.comp, size: 10.0,color: Colors.black))),
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: TextWidget(text: model.dance, size: 12.0,color: Colors.black)),
+                                          child: Center(child: TextWidget(text: model.dance, size: 10.0,color: Colors.black))),
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: TextWidget(text: model.adjuction,color: Colors.black, size: 12.0)),
+                                          child: Center(child: TextWidget(text: model.adjuction,color: Colors.black, size: 10.0))),
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: TextWidget(text: model.overAll, color: Colors.black,size: 12.0)),
+                                          child: Center(child: TextWidget(text: model.overAll, color: Colors.black,size: 10.0))),
                                       Container(
                                           padding: EdgeInsets.all(5.0),
-                                          child: TextWidget(text: model.special,color: Colors.black, size: 12.0)),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        );
-                      },
-                    ),)
-                  ],
-                ),
+                                          child: Center(child: TextWidget(text: model.special,color: Colors.black, size: 10.0))),
+                                    ]
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
               ),
-
 
             ],
           ),

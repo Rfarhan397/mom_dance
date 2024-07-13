@@ -78,6 +78,7 @@ class FavourteLinksScreen extends StatelessWidget {
                             },
                             child: Container(
                               padding: EdgeInsets.all(15.0),
+                              margin: EdgeInsets.only(bottom: 10.0),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
                                 color: Colors.grey.shade300,

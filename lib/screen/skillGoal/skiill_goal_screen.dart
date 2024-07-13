@@ -67,7 +67,7 @@ class SkiillGoalScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
-                          child: Center(child: TextWidget(text: "Date Mastered", size: 12.0,color: Colors.white))),
+                          child: Center(child: TextWidget(text: "Date Achieved", size: 12.0,color: Colors.white))),
                     ]
                   )
                 ],

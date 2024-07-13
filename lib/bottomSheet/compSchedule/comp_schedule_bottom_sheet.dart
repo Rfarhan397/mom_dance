@@ -15,7 +15,14 @@ import '../../helper/text_widget.dart';
 import '../../provider/constant/value_provider.dart';
 
 class CompScheduleBottomSheet extends StatelessWidget {
-  CompScheduleBottomSheet({super.key});
+  String id,competition,date,location,type;
+  CompScheduleBottomSheet({super.key,
+    this.id = '',
+    this.competition = '',
+    this.date = '',
+    this.location = '',
+    this.type = 'new',
+  });
 
   var dateController = TextEditingController();
   var compController = TextEditingController();
@@ -60,12 +67,12 @@ class CompScheduleBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
             TextWidget(text: "Competition", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Competition", controller: compController),
+            CustomTextField(hintText: type == "edit" ? compController.text = competition : "Competition", controller: compController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Location", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "location", controller: locationController),
+            CustomTextField(hintText:type == "edit" ? locationController.text = competition : "location", controller: locationController),
 
             Consumer<PdfProvider>(
              builder: (context,provider, child){
@@ -84,12 +91,12 @@ class CompScheduleBottomSheet extends StatelessWidget {
             ),
 
             SizedBox(height: 40.0,),
-            SimpleButtonWidget(text: "Add", onClicked: () async{
+            SimpleButtonWidget(text: type == "edit" ? "Update" :"Add", onClicked: () async{
 
               String downloadUrl = await pdfProvider.uploadToDatabase(pdfProvider.filePath);
 
               final compSchedule = CompScheduleModel(
-                  id: autoID(),
+                  id: type == "edit" ? id : autoID(),
                   date: dateController.text.toString().trim(),
                   comp: compController.text.toString().trim(),
                   location: locationController.text.toString().trim(),
@@ -97,7 +104,11 @@ class CompScheduleBottomSheet extends StatelessWidget {
                 pdfUrl: downloadUrl
               );
 
-             await CompJournalServices().addCompSchedule(compSchedule, context);
+              if(type == "edit"){
+                await CompJournalServices().updateCompSchedule(compSchedule, context);
+              }else{
+                await CompJournalServices().addCompSchedule(compSchedule, context);
+              }
              dateController.text = "";
              compController.text = "";
               locationController.text = "";

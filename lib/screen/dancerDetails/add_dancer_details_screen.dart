@@ -103,7 +103,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
                   ),
                   CompJournalCard(
                     image: AppAssets.glass_schedule,
-                    title: 'Class Schedule',
+                    title: 'Dance Schedule',
                     press: () {
                       log("Id: ${dancer.id}");
                       Get.toNamed(RoutesName.classSchedule,arguments: {
