@@ -167,7 +167,7 @@ class CompJournalCard extends StatelessWidget {
                 image,
                 width: double.infinity,
                 height: Get.width * 0.50 - 50,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             Container(
