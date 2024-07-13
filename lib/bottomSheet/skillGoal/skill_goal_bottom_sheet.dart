@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:mom_dance/helper/button_widget.dart';
-import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/model/skillGoal/skill_goal_model.dart';
-import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:mom_dance/services/skillGoal/skill_goall_services.dart';
 import 'package:provider/provider.dart';
-
 import '../../constant.dart';
 import '../../helper/custom_textfield.dart';
 import '../../helper/simple_button_widget.dart';
 import '../../helper/text_widget.dart';
 import '../../provider/constant/value_provider.dart';
+
 class SkillGoalBottomSheet extends StatelessWidget {
   final String id;
   String skillID,skill,date,type,dancerID;

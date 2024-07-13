@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:mom_dance/helper/button_widget.dart';
-import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
-import 'package:mom_dance/model/compSchedule/comp_schedule_model.dart.dart';
 import 'package:mom_dance/model/favouriteLink/favourite_links_model.dart';
-import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:mom_dance/services/favouriteLink/favourite_links_services.dart';
-import 'package:provider/provider.dart';
-
 import '../../constant.dart';
 import '../../helper/custom_textfield.dart';
 import '../../helper/simple_button_widget.dart';
 import '../../helper/text_widget.dart';
-import '../../provider/constant/value_provider.dart';
+
 class FavouriteLinksBottomSheet extends StatelessWidget {
   String id,name,link,type;
   FavouriteLinksBottomSheet({super.key,

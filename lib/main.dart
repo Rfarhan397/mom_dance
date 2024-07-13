@@ -11,6 +11,7 @@ import 'package:mom_dance/provider/dancer/dancer_provider.dart';
 import 'package:mom_dance/provider/image/image_provider.dart';
 import 'package:mom_dance/provider/login_signup/login_signup_provider.dart';
 import 'package:mom_dance/provider/measurements/measurement_provider.dart';
+import 'package:mom_dance/provider/pdf/pdf_provider.dart';
 import 'package:mom_dance/provider/user/user_provider.dart';
 import 'package:mom_dance/routes/routes.dart';
 import 'package:mom_dance/routes/routes_name.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ClassScheduleProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => PackingProvider()),
+        ChangeNotifierProvider(create: (_) => PdfProvider()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

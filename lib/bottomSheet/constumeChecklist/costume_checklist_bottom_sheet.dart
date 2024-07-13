@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:mom_dance/helper/button_widget.dart';
-import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/model/constumeChecklist/costume_checklist_model.dart';
-import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:mom_dance/services/costumeChecklist/costume_checklist_services.dart';
 import 'package:provider/provider.dart';
-
 import '../../constant.dart';
 import '../../helper/button_loading_widget.dart';
 import '../../helper/custom_textfield.dart';
 import '../../helper/image_loader_widget.dart';
-import '../../helper/simple_button_widget.dart';
 import '../../helper/text_widget.dart';
 import '../../provider/constant/value_provider.dart';
 import '../../provider/image/image_provider.dart';
 import '../../res/appIcon/app_icons.dart';
+
 class CostumeChecklistBottomSheet extends StatelessWidget {
   final String id;
   String image,dancerID,dance,costume,accesspries,shoes,type;

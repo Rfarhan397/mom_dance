@@ -2,17 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mom_dance/bottomSheet/comp/comp_bottom_sheet.dart';
 import 'package:mom_dance/bottomSheet/compSchedule/comp_schedule_bottom_sheet.dart';
 import 'package:mom_dance/helper/simple_header.dart';
 import 'package:mom_dance/helper/text_widget.dart';
-import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/model/compSchedule/comp_schedule_model.dart.dart';
-import 'package:mom_dance/res/appAsset/app_assets.dart';
-import 'package:mom_dance/res/appIcon/app_icons.dart';
 import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:provider/provider.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../../constant.dart';
 import '../../helper/image_loader_widget.dart';
 import '../../provider/dancer/dancer_provider.dart';
@@ -72,6 +68,13 @@ class CompScheduleScreen extends StatelessWidget {
                               gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Location", size: 12.0,color: Colors.white))),
+
+                      Container(
+                          padding: EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                              gradient: gradientColor
+                          ),
+                          child: Center(child: TextWidget(text: "PDF", size: 12.0,color: Colors.white))),
                     ]
                   )
                 ],
@@ -108,11 +111,13 @@ class CompScheduleScreen extends StatelessWidget {
                                   onDelete: () async{
                               await  CompJournalServices().deleteCompSchedule(model.id, context);
                               Get.back();
-                              }, onDetails: (){}, onEdit: (){});
+                              }, onDetails: (){}, onEdit: (){
+
+                              });
                             },
                             child: Table(
                               border: TableBorder.all(width: 1.0,color: Colors.black),
-                              columnWidths: {
+                              columnWidths: const {
                                 0 : FlexColumnWidth(1),
                                 1 : FlexColumnWidth(1),
                                 2 : FlexColumnWidth(1),
@@ -132,6 +137,15 @@ class CompScheduleScreen extends StatelessWidget {
                                       Container(
                                           padding: EdgeInsets.all(5.0),
                                           child: Center(child: TextWidget(text: model.location, size: 10.0,color: Colors.black))),
+
+                                      GestureDetector(
+                                        onTap: (){
+                                          launchWebUrl(url: model.pdfUrl);
+                                        },
+                                        child: Container(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Center(child: TextWidget(text:'Open Pdf', size: 10.0,color: Colors.black,isBold: true,))),
+                                      ),
                                     ]
                                 )
                               ],
@@ -157,6 +171,12 @@ class CompScheduleScreen extends StatelessWidget {
         child: Icon(Icons.add,color: Colors.white,),
       ),
     );
+  }
+  Future<void> launchWebUrl({required String url}) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $url';
+    }
   }
 }
 

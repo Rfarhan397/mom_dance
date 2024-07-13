@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:mom_dance/helper/button_widget.dart';
-import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/provider/classSchedulle/class_schedule_provider.dart';
-import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:provider/provider.dart';
-
 import '../../constant.dart';
 import '../../helper/custom_textfield.dart';
 import '../../helper/simple_button_widget.dart';
 import '../../helper/text_widget.dart';
-import '../../provider/constant/value_provider.dart';
+
 class ClassScheduleBottomSheet extends StatelessWidget {
   final String id;
   ClassScheduleBottomSheet({super.key, required this.id});
@@ -31,7 +26,7 @@ class ClassScheduleBottomSheet extends StatelessWidget {
      provider.getClassSchedule(id: id);
     return Container(
       width: Get.width,
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
           gradient: gradientColor,
           borderRadius: const BorderRadius.only(
@@ -47,14 +42,14 @@ class ClassScheduleBottomSheet extends StatelessWidget {
             TextWidget(text: "Add Dance Schedule", size: 16.0,color: Colors.white,),
 
 
-            SizedBox(height: 20.0,),
+           const SizedBox(height: 20.0,),
             TextWidget(text: "Sunday", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+           const SizedBox(height: 10.0,),
             CustomTextField(hintText: "enter schedule", controller: sundayController),
 
-            SizedBox(height: 20.0,),
+           const SizedBox(height: 20.0,),
             TextWidget(text: "Monday", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+           const SizedBox(height: 10.0,),
             CustomTextField(hintText: "Monday", controller: mondayController),
 
             SizedBox(height: 20.0,),

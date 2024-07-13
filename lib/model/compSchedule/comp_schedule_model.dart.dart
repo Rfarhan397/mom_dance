@@ -7,6 +7,7 @@ class CompScheduleModel {
   String currentDate;
   String currentTime;
   String location;
+  String pdfUrl;
 
 
   CompScheduleModel({
@@ -15,6 +16,7 @@ class CompScheduleModel {
     required this.comp,
     required this.userUID,
     required this.location,
+    required this.pdfUrl,
     DateTime? timestamp,
     String? currentDate,
     String? currentTime,
@@ -32,6 +34,7 @@ class CompScheduleModel {
       'timestamp': timestamp.toIso8601String(),
       'currentDate': currentDate,
       'currentTime': currentTime,
+      'pdfUrl': pdfUrl,
     };
   }
 
@@ -43,6 +46,7 @@ class CompScheduleModel {
         comp: '',
         userUID: '',
         location: '',
+        pdfUrl: '',
       );
     }
     return CompScheduleModel(
@@ -50,6 +54,7 @@ class CompScheduleModel {
       date: map['date'] ?? '',
       comp: map['comp'] ?? '',
       userUID: map['userUID'] ?? '',
+      pdfUrl: map['pdfUrl'] ?? '',
       location: map['location'] ?? '',
       timestamp: map['timestamp'] != null ? DateTime.parse(map['timestamp']) : DateTime.now(),
       currentDate: map['currentDate'] ?? '',

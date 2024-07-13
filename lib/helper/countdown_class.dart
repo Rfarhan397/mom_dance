@@ -48,7 +48,7 @@ class CountdownScreen extends StatelessWidget {
                 final seconds = duration.inSeconds % 60;
 
 
-                log("Months: $months: $days: $hours: $minutes: $seconds");
+               // log("Months: $months: $days: $hours: $minutes: $seconds");
 
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
@@ -215,6 +217,31 @@ void showCustomDialog({
   );
 }
 
+Future<String> pickAndUpdateFile() async {
+  final result = await FilePicker.platform.pickFiles(
+    type: FileType.custom,
+    allowedExtensions: ['pdf'], // Allow PDF files
+  );
+
+  if (result != null && result.files.isNotEmpty) {
+    final pickedFile = result.files.single;
+    final double fileSizeInMB = pickedFile.size / (1024 * 1024);
+
+    log("Selected file size: ${fileSizeInMB.toStringAsFixed(2)} MB");
+    // Check if file size is greater than 25 MB
+    if (pickedFile.size > 25 * 1024 * 1024) {
+      showSnackBar(title: "File size should not exceed 25 MB",subtitle: "");
+      return "";
+    }
+
+    log("path is ${pickedFile.path}");
+    return pickedFile.path!;
+  } else {
+    // Show an error message if no file was selected
+    showSnackBar(title: "Please pick a file",subtitle: "");
+    return "";
+  }
+}
 
 void showCustomDialogBox({
   required VoidCallback onDelete,
@@ -263,3 +290,4 @@ void showCustomDialogBox({
     ),
   );
 }
+

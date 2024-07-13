@@ -1,17 +1,19 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:mom_dance/helper/button_widget.dart';
-import 'package:mom_dance/model/compJournal/comp_journal_model.dart';
 import 'package:mom_dance/model/compSchedule/comp_schedule_model.dart.dart';
+import 'package:mom_dance/provider/pdf/pdf_provider.dart';
 import 'package:mom_dance/services/compJornal/comp_journal_services.dart';
 import 'package:provider/provider.dart';
-
 import '../../constant.dart';
 import '../../helper/custom_textfield.dart';
 import '../../helper/simple_button_widget.dart';
 import '../../helper/text_widget.dart';
 import '../../provider/constant/value_provider.dart';
+
 class CompScheduleBottomSheet extends StatelessWidget {
   CompScheduleBottomSheet({super.key});
 
@@ -19,11 +21,9 @@ class CompScheduleBottomSheet extends StatelessWidget {
   var compController = TextEditingController();
   var locationController = TextEditingController();
 
-   DateTime? _selectedDate;
-
-
    @override
   Widget build(BuildContext context) {
+     final pdfProvider = Provider.of<PdfProvider>(context,listen: false);
     return Container(
       width: Get.width,
       padding: EdgeInsets.all(20.0),
@@ -67,10 +67,26 @@ class CompScheduleBottomSheet extends StatelessWidget {
             SizedBox(height: 10.0,),
             CustomTextField(hintText: "location", controller: locationController),
 
+            Consumer<PdfProvider>(
+             builder: (context,provider, child){
+               return ButtonWidget(
+                 borderColor: whiteColor,
+                 textColor: Colors.black,
+                 width: Get.width,
+                 height: 50.0,
+                 onClicked: () async {
+                    String path =  await pickAndUpdateFile();
+                    provider.setPdfFile(path);
+                 },
+                 text: provider.filePath.isNotEmpty ? "Pdf Selected Size" : 'Select PDF',
+               );
+             },
+            ),
 
             SizedBox(height: 40.0,),
             SimpleButtonWidget(text: "Add", onClicked: () async{
 
+              String downloadUrl = await pdfProvider.uploadToDatabase(pdfProvider.filePath);
 
               final compSchedule = CompScheduleModel(
                   id: autoID(),
@@ -78,6 +94,7 @@ class CompScheduleBottomSheet extends StatelessWidget {
                   comp: compController.text.toString().trim(),
                   location: locationController.text.toString().trim(),
                   userUID: auth.currentUser!.uid.toString(),
+                pdfUrl: downloadUrl
               );
 
              await CompJournalServices().addCompSchedule(compSchedule, context);

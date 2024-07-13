@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:mom_dance/model/danceShoes/dance_shoes_model.dart';
 import 'package:mom_dance/services/danceShoes/dance_shoes_services.dart';
 import '../../constant.dart';

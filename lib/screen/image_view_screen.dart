@@ -13,12 +13,12 @@ class ImageViewScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+           const  Padding(
               padding: const EdgeInsets.all(20.0),
               child: BackButtonWidget(),
             ),
 
-            SizedBox(height: 20.0,),
+           const SizedBox(height: 20.0,),
             Center(
               child: ImageLoaderWidget(imageUrl: imageUrl,),
             ),
