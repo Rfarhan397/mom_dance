@@ -85,7 +85,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
                     },
                     radius: 15.0,
                     hintText: provider.selectedDateRange == null ?
-                    type == "edit" ? endDateController.text = date  : "Select Date" :
+                    type == "edit" ? endDateController.text = endDate  : "Select Date" :
                     endDateController.text = "${endFormatDateRange(provider.selectedDateRange)}",
                     controller: endDateController
                 );

@@ -98,6 +98,7 @@ class TravelDetailsScreen extends StatelessWidget {
                                               id: model.id,
                                               comp: model.comp,
                                               date: model.date,
+                                              endDate: model.checkOutDate,
                                               location: model.location,
                                               image: model.confirmationImage,
                                               registration: model.registration,
