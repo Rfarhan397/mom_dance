@@ -1,6 +1,7 @@
 class TravelDetailsModel {
   String id;
   String date;
+  String checkOutDate;
   String comp;
   String userUID;
   DateTime timestamp;
@@ -15,6 +16,7 @@ class TravelDetailsModel {
   TravelDetailsModel({
     required this.id,
     required this.date,
+    required this.checkOutDate,
     required this.comp,
     required this.userUID,
     required this.location,
@@ -32,6 +34,7 @@ class TravelDetailsModel {
     return {
       'id': id,
       'date': date,
+      'checkOutDate': checkOutDate,
       'comp': comp,
       'userUID': userUID,
       'location': location,
@@ -49,6 +52,7 @@ class TravelDetailsModel {
       return TravelDetailsModel(
         id: '',
         date: '',
+        checkOutDate: '',
         comp: '',
         userUID: '',
         location: '',
@@ -60,6 +64,7 @@ class TravelDetailsModel {
     return TravelDetailsModel(
       id: map['id'] ?? '',
       date: map['date'] ?? '',
+      checkOutDate: map['checkOutDate'] ?? '',
       comp: map['comp'] ?? '',
       userUID: map['userUID'] ?? '',
       location: map['location'] ?? '',

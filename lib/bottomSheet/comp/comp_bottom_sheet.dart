@@ -55,7 +55,7 @@ class CompBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Comp Journal", size: 16.0,color: Colors.white,),
+            TextWidget(text: "Add Comp Entry", size: 16.0,color: Colors.white,),
             SizedBox(height: 20.0,),
             TextWidget(text: "Date", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
@@ -67,7 +67,7 @@ class CompBottomSheet extends StatelessWidget {
                     },
                     radius: 15.0,
                     hintText: provider.selectedDate == null ?
-                    type == "edit" ? dateController.text = date : "Select Date" :
+                    type == "edit" ? dateController.text = date : "select date" :
                     dateController.text = "${provider.selectedDate.day}/${provider.selectedDate.month}/${provider.selectedDate.year}",
                     controller: dateController
                 );
@@ -76,12 +76,12 @@ class CompBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
             TextWidget(text: "Competition", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: type == "edit" ? compController.text = comp : "Competition", controller: compController),
+            CustomTextField(hintText: type == "edit" ? compController.text = comp : "competition", controller: compController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Dance", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: type == "edit" ? daceController.text = dance : "Dance", controller: daceController),
+            CustomTextField(hintText: type == "edit" ? daceController.text = dance : "dance", controller: daceController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Adjudication", size: 14.0,color: Colors.white,),
@@ -91,12 +91,12 @@ class CompBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
             TextWidget(text: "Overall", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText:type == "edit" ? overAllController.text = overAll :  "Overall", controller: overAllController),
+            CustomTextField(hintText:type == "edit" ? overAllController.text = overAll :  "overall", controller: overAllController),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Special", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Specialty Award", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText:type == "edit" ? specialController.text = special :  "Special", controller: specialController),
+            CustomTextField(hintText:type == "edit" ? specialController.text = special :  "special", controller: specialController),
 
             SizedBox(height: 40.0,),
             SimpleButtonWidget(text: type == "edit" ? "Update" : "Add", onClicked: () async{

@@ -82,7 +82,7 @@ class CostumeChecklistBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
             TextWidget(text: "Dance", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText:  type == "edit" ? daceController.text = dance : "Dance", controller: daceController),
+            CustomTextField(hintText:  type == "edit" ? daceController.text = dance : "dance", controller: daceController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Costume", size: 14.0,color: Colors.white,),
@@ -93,7 +93,7 @@ class CostumeChecklistBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
             TextWidget(text: "Accessories", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText:type == "edit" ? accesspriesController.text = accesspries :  "Accesspries", controller: accesspriesController),
+            CustomTextField(hintText:type == "edit" ? accesspriesController.text = accesspries :  "accessories", controller: accesspriesController),
 
 
             SizedBox(height: 20.0,),

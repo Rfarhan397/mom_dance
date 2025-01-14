@@ -36,8 +36,8 @@ class DanceAlbumScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Dance Album"),
-              Container(
+              const SimpleHeader(text: "Dance Album"),
+              SizedBox(
                width: Get.width,
                 height: Get.width * 0.450,
                 child: ClipRRect(
@@ -53,13 +53,13 @@ class DanceAlbumScreen extends StatelessWidget {
                     stream: productProvider.getDanceAlbum(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No dance album found'));
+                        return const Center(child: Text('No dance album found'));
                       }
 
                       List<DanceAlbumModel> musicLibrary = snapshot.data!;
@@ -72,7 +72,7 @@ class DanceAlbumScreen extends StatelessWidget {
                         ),
                         itemCount: musicLibrary.length,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           DanceAlbumModel model = musicLibrary[index];
                           return  GestureDetector(
@@ -100,7 +100,7 @@ class DanceAlbumScreen extends StatelessWidget {
                                   Container(
                                       height: 150.0,
                                       child: ImageLoaderWidget(imageUrl: model.image)),
-                                  SizedBox(height: 10.0,),
+                                  const SizedBox(height: 10.0,),
                                   TextWidget(text: model.name, size: 14.0,color: Colors.black,)
                                 ],
                               ),
@@ -123,7 +123,7 @@ class DanceAlbumScreen extends StatelessWidget {
         },
         tooltip: 'Increment',
         backgroundColor: primaryColor,
-        child: Icon(Icons.add,color: Colors.white,),
+        child: const Icon(Icons.add,color: Colors.white,),
       ),
     );
   }

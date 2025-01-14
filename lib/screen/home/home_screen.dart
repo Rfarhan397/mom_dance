@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                       },),
                 ),
                 const SizedBox(height: 10.0,),
-                Image.asset(AppAssets.logo,width: Get.width,height: Get.width/2.5,),
+                Image.asset(AppIcons.new_icon,width: Get.width,height: Get.width/2.5,),
                 const SizedBox(height: 10.0,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                  builder: (context, provider, child){
 
                    return Container(
-                     padding: EdgeInsets.all(20.0),
+                     padding: const EdgeInsets.all(20.0),
                      decoration: BoxDecoration(
                        gradient: gradientColor,
                        borderRadius: BorderRadius.circular(20.0),
@@ -81,14 +81,14 @@ class HomeScreen extends StatelessWidget {
                 ),
 
                 // menu
-                SizedBox(height: 20.0,),
+                const SizedBox(height: 20.0,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
                       child: MenuCard(
                         image: AppIcons.ic_dancer,
-                        title: 'Dancer Profile',
+                        title: 'Dancer Profiles',
                         press: (){
                           Get.toNamed(RoutesName.dancerScreen);
                         },
@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       child: MenuCard(
                         image: AppIcons.ic_compSchedule,
-                        title: 'Competition Schedules',
+                        title: 'Competition Schedule',
                         press: () {
                           Get.toNamed(RoutesName.compSchedule);
                         },
@@ -114,14 +114,14 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20.0,),
+                const SizedBox(height: 20.0,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
                       child: MenuCard(
                         image: AppIcons.ic_list,
-                        title: 'Competition Packing List',
+                        title: 'Competition Packing Checklist',
                         press: () {
                           Get.toNamed(RoutesName.compPackingScreen);
                         },
@@ -136,22 +136,6 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                     ),
-
-                    Expanded(
-                      child: MenuCard(
-                        image: AppIcons.ic_album,
-                        title: 'Photo Album',
-                        press: () {
-                          Get.toNamed(RoutesName.danceAlbumScreen);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
                     Expanded(
                       child: MenuCard(
                         image: AppIcons.ic_links,
@@ -161,22 +145,39 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    Expanded(
-                      child: MenuCard(
-                        image: AppIcons.ic_offer,
-                        title: 'Special Offers',
-                        press: () {
-                          launchWebUrl(url: 'https://www.dancemomlife.com/');
-                          },
-                      ),
+                    //
+                    // Expanded(
+                    //   child: MenuCard(
+                    //     image: AppIcons.ic_album,
+                    //     title: 'Photo Album',
+                    //     press: () {
+                    //       Get.toNamed(RoutesName.danceAlbumScreen);
+                    //     },
+                    //   ),
+                    // ),
+                  ],
+                ),
+                const SizedBox(height: 20.0,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+
+                    MenuCard(
+                      image: AppIcons.ic_offer,
+                      title: 'Special Offers',
+                      press: () {
+                        launchWebUrl(url:  'https://www.thecompdancelife.com/merch');
+                        },
                     ),
-                    Expanded(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: MenuCard(
                         image: AppIcons.ic_web,
-                        title: 'TheDanceMomLife.com',
+                        title: 'TheCompDanceLife.com',
                         press: () {
-                          launchWebUrl(url: 'https://www.dancemomlife.com/');
-                        },
+              launchWebUrl(url: 'https://www.thecompdancelife.com/');
+
+              },
                       ),
                     ),
                   ],

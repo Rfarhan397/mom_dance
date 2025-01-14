@@ -25,10 +25,8 @@ class CompPackingScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Competition Packing List"),
-              SizedBox(height: 20.0,),
-
-
+              const SimpleHeader(text: "Competition Packing Checklist"),
+              const SizedBox(height: 20.0,),
               Consumer<PackingProvider>(
                 builder: (context, provider, _) {
                   return GridView.builder(
@@ -54,7 +52,8 @@ class CompPackingScreen extends StatelessWidget {
 
                               }, onDetails: (){}, onEdit: (){
                             Navigator.pop(context);
-                            Get.bottomSheet(CompPackingBottomSheet(
+                            Get.bottomSheet(
+                                CompPackingBottomSheet(
                               name: item.name,
                               packID: item.id,
                               type: 'edit',
@@ -133,7 +132,7 @@ class CompPackingScreen extends StatelessWidget {
         },
         tooltip: 'Increment',
         backgroundColor: primaryColor,
-        child: Icon(Icons.add,color: Colors.white,),
+        child: const Icon(Icons.add,color: Colors.white,),
       ),
     );
   }
@@ -170,7 +169,7 @@ class BrushButton extends StatelessWidget {
             child: Container(
               width: 50, // Width of the white box
               height: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
                     bottomLeft: Radius.circular(25),
@@ -184,7 +183,7 @@ class BrushButton extends StatelessWidget {
             child: Center(
               child: Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16, // Adjust the font size as needed
                 ),

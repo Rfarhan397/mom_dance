@@ -33,7 +33,7 @@ class CompScheduleBottomSheet extends StatelessWidget {
      final pdfProvider = Provider.of<PdfProvider>(context,listen: false);
     return Container(
       width: Get.width,
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
           gradient: gradientColor,
           borderRadius: const BorderRadius.only(
@@ -46,10 +46,10 @@ class CompScheduleBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidget(text: "Add Competition Schedule", size: 16.0,color: Colors.white,),
-            SizedBox(height: 20.0,),
+            TextWidget(text: "Add Competition", size: 16.0,color: Colors.white,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Date", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             Consumer<ValueProvider>(
               builder: (context, provider, child){
                 return CustomTextField(
@@ -58,39 +58,39 @@ class CompScheduleBottomSheet extends StatelessWidget {
                     },
                     radius: 15.0,
                     hintText: provider.selectedDateRange == null ?
-                    "Select Date" :
+                    "select date" :
                     dateController.text = "${formatDateRange(provider.selectedDateRange)}",
                     controller: dateController
                 );
               },
             ),
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Competition", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
-            CustomTextField(hintText: type == "edit" ? compController.text = competition : "Competition", controller: compController),
+            const SizedBox(height: 10.0,),
+            CustomTextField(hintText: type == "edit" ? compController.text = competition : "competition", controller: compController),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Location", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(hintText:type == "edit" ? locationController.text = competition : "location", controller: locationController),
 
-            Consumer<PdfProvider>(
-             builder: (context,provider, child){
-               return ButtonWidget(
-                 borderColor: whiteColor,
-                 textColor: Colors.black,
-                 width: Get.width,
-                 height: 50.0,
-                 onClicked: () async {
-                    String path =  await pickAndUpdateFile();
-                    provider.setPdfFile(path);
-                 },
-                 text: provider.filePath.isNotEmpty ? "Pdf Selected Size" : 'Select PDF',
-               );
-             },
-            ),
+            // Consumer<PdfProvider>(
+            //  builder: (context,provider, child){
+            //    return ButtonWidget(
+            //      borderColor: whiteColor,
+            //      textColor: Colors.black,
+            //      width: Get.width,
+            //      height: 50.0,
+            //      onClicked: () async {
+            //         String path =  await pickAndUpdateFile();
+            //         provider.setPdfFile(path);
+            //      },
+            //      text: provider.filePath.isNotEmpty ? "Pdf Selected Size" : 'Select PDF',
+            //    );
+            //  },
+            // ),
 
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
             SimpleButtonWidget(text: type == "edit" ? "Update" :"Add", onClicked: () async{
 
               String downloadUrl = await pdfProvider.uploadToDatabase(pdfProvider.filePath);
@@ -116,7 +116,7 @@ class CompScheduleBottomSheet extends StatelessWidget {
               Navigator.pop(context);
 
             }, width: Get.width, height: 50.0),
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
           ],
         ),
       ),

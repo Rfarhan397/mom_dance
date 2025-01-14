@@ -49,12 +49,12 @@ class DanceShoesBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
             TextWidget(text: "Dance Genre", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: type == "edit"  ? shoesController.text = shoes : "Shoes", controller: shoesController),
+            CustomTextField(hintText: type == "edit"  ? shoesController.text = shoes : "dance genre", controller: shoesController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Brand / Style", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText:type == "edit"  ? brandController.text = brand : "brand", controller: brandController),
+            CustomTextField(hintText:type == "edit"  ? brandController.text = brand : "brand/style", controller: brandController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Color", size: 14.0,color: Colors.white,),

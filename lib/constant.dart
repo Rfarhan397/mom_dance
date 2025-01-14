@@ -156,6 +156,19 @@ String formatDateRange(DateTimeRange? range) {
   final String end = formatter.format(range.end);
   return '$start-$end';
 }
+String startFormatDateRange(DateTimeRange? range) {
+  if (range == null) return 'No date range selected.';
+  final DateFormat formatter = DateFormat('MM/dd/yyyy');
+  final String start = formatter.format(range.start);
+  return '$start';
+}
+String endFormatDateRange(DateTimeRange? range) {
+  if (range == null) return 'No date range selected.';
+  final DateFormat formatter = DateFormat('MM/dd/yyyy');
+  final String end = formatter.format(range.end);
+  return '$end';
+}
+
 
 
 void showCustomDialog({
@@ -164,7 +177,7 @@ void showCustomDialog({
   required VoidCallback onEdit,
   bool isThird = true,
   bool isSecond = true,
-  String thirdText = "Open",
+  String thirdText = "open",
   String secondText = "edit",
 }) {
   Get.dialog(
@@ -183,7 +196,7 @@ void showCustomDialog({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
            const Text(
-              'Tap any to take Action',
+              'Tap any to take action',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -206,7 +219,7 @@ void showCustomDialog({
                 ),
                 TextButton(
                   onPressed: onDelete,
-                  child: TextWidget(text: "Delete",size: 12.0,color: Colors.white,),
+                  child: TextWidget(text: "delete",size: 12.0,color: Colors.white,),
                 ),
               ],
             ),
@@ -263,7 +276,7 @@ void showCustomDialogBox({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Tap any to take Action',
+              'Tap any to take action',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -276,11 +289,11 @@ void showCustomDialogBox({
               children: [
                   TextButton(
                     onPressed: onEdit,
-                    child: TextWidget(text: "Edit",size: 12.0,color: Colors.white,),
+                    child: TextWidget(text: "edit",size: 12.0,color: Colors.white,),
                   ),
                 TextButton(
                   onPressed: onDelete,
-                  child: TextWidget(text: "Delete",size: 12.0,color: Colors.white,),
+                  child: TextWidget(text: "delete",size: 12.0,color: Colors.white,),
                 ),
               ],
             ),

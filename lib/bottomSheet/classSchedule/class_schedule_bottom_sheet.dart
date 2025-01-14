@@ -50,33 +50,33 @@ class ClassScheduleBottomSheet extends StatelessWidget {
            const SizedBox(height: 20.0,),
             TextWidget(text: "Monday", size: 14.0,color: Colors.white,),
            const SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Monday", controller: mondayController),
+            CustomTextField(hintText: "enter schedule", controller: mondayController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Tuesday", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Tuesday", controller: tuesdayController),
+            CustomTextField(hintText: "enter schedule", controller: tuesdayController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Wednesday", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Wednesday", controller: wednesdayController),
+            CustomTextField(hintText: "enter schedule", controller: wednesdayController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Thursday", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Thursday", controller: thursdayController),
+            CustomTextField(hintText: "enter schedule", controller: thursdayController),
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Friday", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Friday", controller: fridayController),
+            CustomTextField(hintText: "enter schedule", controller: fridayController),
 
 
             SizedBox(height: 20.0,),
             TextWidget(text: "Saturday", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "Saturday", controller: saturdayController),
+            CustomTextField(hintText: "enter schedule", controller: saturdayController),
 
             SizedBox(height: 40.0,),
             SimpleButtonWidget(text: "Add", onClicked: () async{

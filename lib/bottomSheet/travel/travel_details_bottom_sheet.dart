@@ -14,11 +14,12 @@ import '../../provider/image/image_provider.dart';
 import '../../res/appIcon/app_icons.dart';
 
 class TravelDetailsBottomSheet extends StatelessWidget {
-  String date,comp,location,registration,hotel,type,image,id;
+  String date,endDate,comp,location,registration,hotel,type,image,id;
 
   TravelDetailsBottomSheet({super.key,
    this.id = '',
    this.date = '',
+   this.endDate = '',
    this.comp= '',
    this.location= '',
    this.registration= '',
@@ -28,6 +29,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
   });
 
   var dateController = TextEditingController();
+  var endDateController = TextEditingController();
   var compController = TextEditingController();
   var locationController = TextEditingController();
   var registrationController = TextEditingController();
@@ -40,7 +42,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
      final imageProvider = Provider.of<ImagePickProvider>(context,listen: false);
     return Container(
       width: Get.width,
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
           gradient: gradientColor,
           borderRadius: const BorderRadius.only(
@@ -55,9 +57,9 @@ class TravelDetailsBottomSheet extends StatelessWidget {
           children: [
             TextWidget(text: "Add Travel Details", size: 16.0,color: Colors.white,isBold: true,),
 
-            SizedBox(height: 20.0,),
-            TextWidget(text: "Date", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 20.0,),
+            TextWidget(text: "Check-in Date", size: 14.0,color: Colors.white,),
+            const SizedBox(height: 10.0,),
             Consumer<ValueProvider>(
               builder: (context, provider, child){
                 return CustomTextField(
@@ -67,35 +69,52 @@ class TravelDetailsBottomSheet extends StatelessWidget {
                     radius: 15.0,
                     hintText: provider.selectedDateRange == null ?
                     type == "edit" ? dateController.text = date  : "Select Date" :
-                    dateController.text = "${formatDateRange(provider.selectedDateRange)}",
+                    dateController.text = "${startFormatDateRange(provider.selectedDateRange)}",
                     controller: dateController
                 );
               },
             ),
+            const SizedBox(height: 20.0,),
+            TextWidget(text: "Check-out Date", size: 14.0,color: Colors.white,),
+            const SizedBox(height: 10.0,),
+            Consumer<ValueProvider>(
+              builder: (context, provider, child){
+                return CustomTextField(
+                    callback: (){
+                      selectDateRangeFun(context);
+                    },
+                    radius: 15.0,
+                    hintText: provider.selectedDateRange == null ?
+                    type == "edit" ? endDateController.text = date  : "Select Date" :
+                    endDateController.text = "${endFormatDateRange(provider.selectedDateRange)}",
+                    controller: endDateController
+                );
+              },
+            ),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Competition", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(hintText:type == "edit" ? compController.text = comp  : "comp", controller: compController),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Location", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(hintText: type == "edit" ? locationController.text = location  : "location", controller: locationController),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Confirmation No", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(hintText:type == "edit" ? registrationController.text = registration  : "confirmation no", controller: registrationController),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Hotel", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(hintText: type == "edit" ? hotelController.text = hotel  : "hotel", controller: hotelController),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Upload snapshot of confirmation here", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             Consumer<ImagePickProvider>(
               builder: (context,provider, child){
                 return GestureDetector(
@@ -120,7 +139,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
               },
             ),
 
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
 
 
             Consumer<ValueProvider>(
@@ -137,6 +156,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
                       final downloadUrl =  await imageProvider.uploadImage(imageFile: imageProvider.imageFile);
                       final travelDetails = TravelDetailsModel(
                           id: autoID(),
+                          checkOutDate: endDateController.text.toString().trim(),
                           date: dateController.text.toString().trim(),
                           confirmationImage: downloadUrl.toString(),
                           userUID: auth.currentUser!.uid.toString(),
@@ -147,6 +167,12 @@ class TravelDetailsBottomSheet extends StatelessWidget {
                       );
 
                       await TravelDetailsServices().addTravelDetails(travelDetails, context);
+                      dateController.text = "";
+                      locationController.text = "";
+                      registrationController.text = "";
+                      hotelController.text = "";
+                      compController.text = "";
+                      endDateController.text = "";
                     }else{
                       showSnackBar(title: "Image Required", subtitle: "");
                     }
@@ -159,6 +185,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
                     }
                     final travelDetails = TravelDetailsModel(
                         id: id,
+                        checkOutDate: endDateController.text.toString().trim(),
                         date: dateController.text.toString().trim(),
                         confirmationImage: downloadUrl.toString(),
                         userUID: auth.currentUser!.uid.toString(),
@@ -177,6 +204,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
                   registrationController.text = "";
                   hotelController.text = "";
                   compController.text = "";
+                  endDateController.text = "";
 
                   imageProvider.clear();
                   Get.back();
@@ -189,7 +217,7 @@ class TravelDetailsBottomSheet extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
           ],
         ),
       ),

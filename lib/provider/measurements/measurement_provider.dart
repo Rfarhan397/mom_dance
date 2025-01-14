@@ -59,7 +59,7 @@ class MeasurementProvider extends ChangeNotifier{
           .doc(id)
           .collection(DbKey.c_measurement).doc("details").update({
         key : value,
-        DbKey.k_lastUpdate  : "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
+        DbKey.k_lastUpdate  : "${DateTime.now().month}/${DateTime.now().day}/${DateTime.now().year}",
       }).whenComplete((){
         showSnackBar(title: "new saved", subtitle: "");
       });

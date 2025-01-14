@@ -18,15 +18,15 @@ class LoginHeader extends StatelessWidget {
         children: [
           Center(
             child: Image.asset(
-              AppAssets.login_bg, // Replace with your image asset
+              AppAssets.login_bg_new, // Replace with your image asset
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
             ),
           ),
-          Container(
-            color: Colors.red.withOpacity(0.5), // Overlay color with opacity
-          ),
+        //   Container(
+        //     color: Colors.red.withOpacity(0.5), // Overlay color with opacity
+        //   ),
         ],
       ),
     );

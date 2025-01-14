@@ -33,7 +33,7 @@ class CompScheduleScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Competition Schedule"),
+              const SimpleHeader(text: "Competition Schedule"),
               Container(
                width: Get.width,
                 height: Get.width * 0.450,
@@ -42,45 +42,45 @@ class CompScheduleScreen extends StatelessWidget {
                   child: ImageLoaderWidget(imageUrl: provider.compSchedule.toString(),),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               Table(
                 border: TableBorder.all(width: 1.0,color: Colors.black),
-                columnWidths: {
-                  0 : FlexColumnWidth(1),
-                  1 : FlexColumnWidth(1),
-                  2 : FlexColumnWidth(1),
-                  3 : FlexColumnWidth(1),
-                  4 : FlexColumnWidth(1),
-                  5 : FlexColumnWidth(1),
+                columnWidths: const {
+                  0 : const FlexColumnWidth(1),
+                  1 : const FlexColumnWidth(1),
+                  2 : const FlexColumnWidth(1),
+                  3 : const FlexColumnWidth(1),
+                  4 : const FlexColumnWidth(1),
+                  5 : const FlexColumnWidth(1),
                 },
                 children: [
                   TableRow(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                             gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Competition", size: 12.0,color: Colors.white,))),
                       Container(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Date", size: 12.0,color: Colors.white))),
                       Container(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                               gradient: gradientColor
                           ),
                           child: Center(child: TextWidget(text: "Location", size: 12.0,color: Colors.white))),
 
-                      Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                              gradient: gradientColor
-                          ),
-                          child: Center(child: TextWidget(text: "PDF", size: 12.0,color: Colors.white))),
+                    //   Container(
+                    //       padding: EdgeInsets.all(5.0),
+                    //       decoration: BoxDecoration(
+                    //           gradient: gradientColor
+                    //       ),
+                    //       child: Center(child: TextWidget(text: "PDF", size: 12.0,color: Colors.white))),
                     ]
                   )
                 ],
@@ -91,20 +91,19 @@ class CompScheduleScreen extends StatelessWidget {
                     stream: productProvider.getCompSchedule(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No Competition Schedule found'));
+                        return const Center(child: Text('No Competition Schedule found'));
                       }
-
                       List<CompScheduleModel> compSchedule = snapshot.data!;
                       return ListView.builder(
                         itemCount: compSchedule.length,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                          CompScheduleModel model = compSchedule[index];
                          log("message${model.date}");
@@ -130,33 +129,33 @@ class CompScheduleScreen extends StatelessWidget {
                             child: Table(
                               border: TableBorder.all(width: 1.0,color: Colors.black),
                               columnWidths: {
-                                0 : FlexColumnWidth(1),
-                                1 : FlexColumnWidth(1),
-                                2 : FlexColumnWidth(1),
-                                3 : FlexColumnWidth(1),
-                                4 : FlexColumnWidth(1),
-                                5 : FlexColumnWidth(1),
+                                0 : const FlexColumnWidth(1),
+                                1 : const FlexColumnWidth(1),
+                                2 : const FlexColumnWidth(1),
+                                3 : const FlexColumnWidth(1),
+                                4 : const FlexColumnWidth(1),
+                                // 5 : FlexColumnWidth(1),
                               },
                               children: [
                                 TableRow(
                                     children: [
                                       Container(
-                                          padding: EdgeInsets.all(5.0),
+                                          padding: const EdgeInsets.all(5.0),
                                           child: Center(child: TextWidget(text: model.comp, size: 10.0,color: Colors.black,))),
                                       Container(
-                                          padding: EdgeInsets.all(5.0),
+                                          padding: const EdgeInsets.all(5.0),
                                           child: Center(child: TextWidget(text: model.date, size: 10.0,color: Colors.black))),
                                       Container(
-                                          padding: EdgeInsets.all(5.0),
+                                          padding: const EdgeInsets.all(5.0),
                                           child: Center(child: TextWidget(text: model.location, size: 10.0,color: Colors.black))),
-                                      GestureDetector(
-                                        onTap: (){
-                                          launchWebUrl(url: model.pdfUrl);
-                                        },
-                                        child: Container(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: Center(child: TextWidget(text: "Open Pdf", size: 10.0,color: Colors.black))),
-                                      ),
+                                      // GestureDetector(
+                                      //   onTap: (){
+                                      //     launchWebUrl(url: model.pdfUrl);
+                                      //   },
+                                      //   child: Container(
+                                      //       padding: EdgeInsets.all(5.0),
+                                      //       child: Center(child: TextWidget(text: "Open Pdf", size: 10.0,color: Colors.black))),
+                                      // ),
                                     ]
                                 )
                               ],
@@ -179,7 +178,7 @@ class CompScheduleScreen extends StatelessWidget {
         },
         tooltip: 'Increment',
         backgroundColor: primaryColor,
-        child: Icon(Icons.add,color: Colors.white,),
+        child: const Icon(Icons.add,color: Colors.white,),
       ),
     );
   }
