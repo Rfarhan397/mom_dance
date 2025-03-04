@@ -29,6 +29,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       cursorColor: Colors.black,
+
       onTap: callback,
       validator: (value){
         if(value!.isEmpty){

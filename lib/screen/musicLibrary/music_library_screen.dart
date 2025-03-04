@@ -20,6 +20,7 @@ import '../../constant.dart';
 import '../../model/constumeChecklist/costume_checklist_model.dart';
 import '../../provider/dancer/dancer_provider.dart';
 import '../../provider/user/user_provider.dart';
+import '../../res/components/custom_tooltip.dart';
 
 class MusicLibraryScreen extends StatelessWidget {
 
@@ -38,7 +39,7 @@ class MusicLibraryScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Add Music"),
+              const SimpleHeader(text: "Add Music"),
               Container(
                width: Get.width,
                 height: Get.width * 0.450,
@@ -55,20 +56,34 @@ class MusicLibraryScreen extends StatelessWidget {
                     stream: productProvider.getMusicLibrary(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No Music Library found'));
+                        return Center(child: Container(
+                          height: 50,
+                          child: CustomTooltip(
+                            message: 'Load your dance music to a third-party storage platform, such as Dropbox, Google Drive, or OneDrive, and paste the link here.',
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: primaryColor.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: const Icon(Icons.question_mark,size: 18,),
+                            ),
+                           ),
+                        ));
                       }
 
                       List<MusicLibraryModel> musicLibrary = snapshot.data!;
                       return ListView.builder(
                         itemCount: musicLibrary.length,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           MusicLibraryModel model = musicLibrary[index];
                           return  MusicCard(url: model.image, name: model.name, musicUrl: model.musicUrl, id: model.id,);
@@ -89,7 +104,7 @@ class MusicLibraryScreen extends StatelessWidget {
         },
         tooltip: 'Increment',
         backgroundColor: primaryColor,
-        child: Icon(Icons.add,color: Colors.white,),
+        child: const Icon(Icons.add,color: Colors.white,),
       ),
     );
   }
@@ -126,7 +141,7 @@ class MusicCard extends StatelessWidget {
        );
       },
       child: Container(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.grey[300],
           borderRadius: BorderRadius.circular(10.0),
@@ -140,7 +155,7 @@ class MusicCard extends StatelessWidget {
                   height: 60.0,
                   child: ImageLoaderWidget(imageUrl: url,)),
             ),
-            SizedBox(width: 10.0),
+            const SizedBox(width: 10.0),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -148,7 +163,7 @@ class MusicCard extends StatelessWidget {
                 TextWidget(text: "Music", size: 12.0,color: Colors.grey.shade700,),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Icon(
               Icons.play_arrow,
               color: Colors.grey.shade700,

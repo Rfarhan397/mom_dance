@@ -29,7 +29,7 @@ class DanceAlbumBottomSheet extends StatelessWidget {
      final imageProvider = Provider.of<ImagePickProvider>(context,listen: false);
     return Container(
       width: Get.width,
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
           gradient: gradientColor,
           borderRadius: const BorderRadius.only(
@@ -43,7 +43,7 @@ class DanceAlbumBottomSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextWidget(text: "Add Dance Album", size: 16.0,color: Colors.white,isBold: true,),
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
 
             Consumer<ImagePickProvider>(
               builder: (context,provider, child){
@@ -69,13 +69,13 @@ class DanceAlbumBottomSheet extends StatelessWidget {
               },
             ),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Name", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(hintText: type == "edit" ? nameController.text = name  : "name", controller: nameController),
 
 
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
 
             Consumer<ValueProvider>(
               builder: (context, provider, child){
@@ -128,7 +128,7 @@ class DanceAlbumBottomSheet extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
           ],
         ),
       ),

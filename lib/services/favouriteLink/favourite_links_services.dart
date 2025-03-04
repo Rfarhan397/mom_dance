@@ -14,6 +14,8 @@ import 'package:mom_dance/provider/constant/value_provider.dart';
 import 'package:mom_dance/provider/image/image_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/compPacking/packing_provider.dart';
+
 class FavouriteLinksServices {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -76,8 +78,11 @@ class FavouriteLinksServices {
         .update(links.toMap())
         .whenComplete((){
       showSnackBar(title: "Comp Update", subtitle: "");
+      Provider.of<PackingProvider>(context,listen: false).fetchPackingList();
       Provider.of<ValueProvider>(context,listen: false).setLoading(false);
       Navigator.pop(context);
+      Get.back();
+      Get.back();
     });
   }
 

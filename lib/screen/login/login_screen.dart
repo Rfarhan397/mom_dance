@@ -27,20 +27,20 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseProvider = Provider.of<LoginSignupProvider>(context,listen: false);
     return Scaffold(
-      backgroundColor: Colors.red.withOpacity(0.5),
+      backgroundColor: Colors.red,
       body: SafeArea(
         child: Stack(
          children: [
-           LoginHeader(),
+           const LoginHeader(),
            Container(
              margin: EdgeInsets.only(top: Get.width / 1.5),
-             padding: EdgeInsets.all(20.0),
+             padding: const EdgeInsets.all(20.0),
              height: Get.height,
-             decoration: BoxDecoration(
+             decoration: const BoxDecoration(
                color: Colors.white,
                borderRadius: BorderRadius.only(
-                 topLeft: Radius.circular(20.0),
-                 topRight: Radius.circular(20.0),
+                 topLeft: Radius.circular(10.0),
+                 topRight: Radius.circular(10.0),
                )
              ),
              child: SingleChildScrollView(
@@ -52,18 +52,17 @@ class LoginScreen extends StatelessWidget {
                    children: [
 
                      TextWidget(text: "Login", size: 32, isBold: true,),
-                     SizedBox(height: 30.0,),
+                     const SizedBox(height: 30.0,),
                      TextWidget(text: "Email", size: 16.0,isBold: true,),
-                     SizedBox(height: 10.0,),
+                     const SizedBox(height: 10.0,),
                      CustomTextField(hintText: "info@example.com", controller: emailController),
 
-                     SizedBox(height: 20.0,),
+                     const SizedBox(height: 20.0,),
                      TextWidget(text: "Password", size: 16.0,isBold: true,),
-                     SizedBox(height: 10.0,),
+                     const SizedBox(height: 10.0,),
                      CustomPasswordTextField(hintText: "*********",
                        controller: passwordController, obscurePassword: _obscurePassword,),
-
-                     SizedBox(height: 10.0,),
+                     const SizedBox(height: 10.0,),
                      GestureDetector(
                        onTap: (){
                          Get.toNamed(RoutesName.forgotScreen);
@@ -72,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                            alignment: AlignmentDirectional.centerEnd,
                            child: TextWidget(text: "Forgot Password?", size: 12.0,isBold: true,)),
                      ),
-                     SizedBox(height: 50.0,),
+                     const SizedBox(height: 50.0,),
                      Consumer<ValueProvider>(
                        builder: (context, provider, child){
                          return provider.isLoading == false  ? ButtonWidget(text: "Login", onClicked: (){
@@ -89,13 +88,13 @@ class LoginScreen extends StatelessWidget {
 
                          }, width: Get.width, height: 50.0) :
                          ButtonLoadingWidget(
-                             loadingMesasge: "login",
+                             loadingMesasge: "logging in",
                              width: Get.width,
-                             height: 50.0
+                             height: 50.0,
                          );
                        },
                      ),
-                     SizedBox(height: 30.0,),
+                     const SizedBox(height: 30.0,),
                      Align(
                        alignment: AlignmentDirectional.center,
                        child: CustomRichText(press: (){

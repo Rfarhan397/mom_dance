@@ -32,8 +32,8 @@ class FavourteLinksScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SimpleHeader(text: "Favorite Links"),
-              SizedBox(height: 20.0,),
+              const SimpleHeader(text: "Favorite Links"),
+              const SizedBox(height: 20.0,),
 
               Consumer<DancerProvider>(
                 builder: (context, productProvider, child) {
@@ -41,20 +41,20 @@ class FavourteLinksScreen extends StatelessWidget {
                     stream: productProvider.getFavouriteLinks(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No Favorite Links found'));
+                        return const Center(child: Text('No Favorite Links found'));
                       }
 
                       List<FavouriteLinksModel> links = snapshot.data!;
                       return ListView.builder(
                         itemCount: links.length,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           FavouriteLinksModel model = links[index];
                           return  GestureDetector(
@@ -77,8 +77,8 @@ class FavourteLinksScreen extends StatelessWidget {
                               });
                             },
                             child: Container(
-                              padding: EdgeInsets.all(15.0),
-                              margin: EdgeInsets.only(bottom: 10.0),
+                              padding: const EdgeInsets.all(15.0),
+                              margin: const EdgeInsets.only(bottom: 10.0),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
                                 color: Colors.grey.shade300,
@@ -88,13 +88,13 @@ class FavourteLinksScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextWidget(text: model.name, size: 14.0,isBold: true,color: Colors.black,),
-                                  SizedBox(height: 5.0,),
+                                  const SizedBox(height: 5.0,),
                                   TextWidget(text: model.link, size: 12.0,maxLine: 1,),
                                   GestureDetector(
                                     onTap: () async{
                                      launchWebUrl(url: "https://${model.link}");
                                     },
-                                    child: Align(
+                                    child: const Align(
                                       alignment: AlignmentDirectional.topEnd,
                                       child: Icon(Icons.link_outlined),
                                     ),
@@ -120,7 +120,7 @@ class FavourteLinksScreen extends StatelessWidget {
         },
         tooltip: 'Increment',
         backgroundColor: primaryColor,
-        child: Icon(Icons.add,color: Colors.white,),
+        child: const Icon(Icons.add,color: Colors.white,),
       ),
     );
   }

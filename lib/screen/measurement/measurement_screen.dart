@@ -40,12 +40,12 @@ class MeasurementScreen extends StatelessWidget {
                     child: ImageLoaderWidget(imageUrl: provider.costumeMeasurements.toString()),
                   ),
                 ),
-                SizedBox(height: 20.0,),
+                const SizedBox(height: 20.0,),
                 Row(
                   children: [
                     Expanded(
                         child: Image.asset(AppAssets.body)),
-                    SizedBox(width: 10.0,),
+                    const SizedBox(width: 10.0,),
                     Expanded(
                         flex: 2,
                         child: BodyDiagram(id: id,))
@@ -82,7 +82,7 @@ class BodyDiagram extends StatelessWidget {
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_shoulder.toString(),));
                  }
              ),
-             SizedBox(height: 10.0,),
+             const SizedBox(height: 10.0,),
 
              DataBox(
                  title: 'Bust/Chest',
@@ -92,7 +92,7 @@ class BodyDiagram extends StatelessWidget {
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_belli.toString(),));
                  }
              ),
-             SizedBox(height: 10.0,),
+             const SizedBox(height: 10.0,),
 
              DataBox(
                  title: 'Waist',
@@ -102,7 +102,7 @@ class BodyDiagram extends StatelessWidget {
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_leg.toString(),));
                  }
              ),
-             SizedBox(height: 10.0,),
+             const SizedBox(height: 10.0,),
 
 
              DataBox(
@@ -113,7 +113,7 @@ class BodyDiagram extends StatelessWidget {
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_hip.toString(),));
                  }
              ),
-             SizedBox(height: 10.0,),
+             const SizedBox(height: 10.0,),
 
              DataBox(
                  title: 'Inseam',
@@ -123,7 +123,7 @@ class BodyDiagram extends StatelessWidget {
                    Get.bottomSheet(MeasurementBottomSheet(id: id, keyName: DbKey.k_knee.toString(),));
                  }
              ),
-             SizedBox(height: 20.0,),
+             const SizedBox(height: 20.0,),
 
 
              Align(
@@ -131,7 +131,7 @@ class BodyDiagram extends StatelessWidget {
                child: Column(
                  children: [
                    TextWidget(text: "Last Update", size: 12.0),
-                   SizedBox(height: 2.0,),
+                   const SizedBox(height: 2.0,),
                    LabelBox(
                      name: provider.lastUpdate,
                    ),
@@ -160,7 +160,7 @@ class DataBox extends StatelessWidget {
           Row(
             children: [
               TextWidget(text: title, size: 18.0,isBold: true,),
-              SizedBox(width: 10.0,),
+              const SizedBox(width: 10.0,),
               LabelBox(
                 name: name,
               ),

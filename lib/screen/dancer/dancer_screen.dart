@@ -27,24 +27,24 @@ class DancerScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                const BackButtonWidget(),
-                SizedBox(height: 20.0,),
+                const SizedBox(height: 20.0,),
                 TextWidget(text: "Dancers", size: 22.0,color: Colors.black,isBold: true,),
-                SizedBox(height: 20.0,),
+                const SizedBox(height: 20.0,),
                 TextWidget(text: "Tap to edit or delete dancers", size: 13.0,),
-                SizedBox(height: 20.0,),
+                const SizedBox(height: 20.0,),
                 Consumer<DancerProvider>(
                   builder: (context, productProvider, child) {
                     return StreamBuilder<List<DancerModel>>(
                       stream: productProvider.getMyDancers(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
                           return Center(child: Text('Error: ${snapshot.error}'));
                         }
                         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                          return Center(child: Text('No Dancer found'));
+                          return const Center(child: Text('No Dancer found'));
                         }
 
                         List<DancerModel> daancers = snapshot.data!;
@@ -57,7 +57,7 @@ class DancerScreen extends StatelessWidget {
                           ),
                           itemCount: daancers.length,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             DancerModel dance = daancers[index];
                             return DancerCard(model: dance,);
@@ -79,7 +79,7 @@ class DancerScreen extends StatelessWidget {
         },
         tooltip: 'Increment',
         backgroundColor: primaryColor,
-        child: Icon(Icons.add,color: Colors.white,),
+        child: const Icon(Icons.add,color: Colors.white,),
       ),
     );
   }
@@ -129,7 +129,7 @@ class DancerCard extends StatelessWidget {
            decoration: BoxDecoration(
              borderRadius: BorderRadius.circular(20),
              image: DecorationImage(
-               image: NetworkImage(model.image), // Replace with your image path
+               image: NetworkImage(model.image),
                fit: BoxFit.cover,
              ),
            ),
@@ -139,7 +139,7 @@ class DancerCard extends StatelessWidget {
                padding: const EdgeInsets.all(8.0),
                child: Text(
                  model.name,
-                 style: TextStyle(
+                 style: const TextStyle(
                    color: Colors.white,
                    fontSize: 14,
                    fontWeight: FontWeight.bold,

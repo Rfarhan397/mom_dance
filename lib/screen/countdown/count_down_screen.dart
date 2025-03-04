@@ -44,7 +44,7 @@ class _SetCountdownScreenState extends State<SetCountdownScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Set Countdown Timer'),
+        title: const Text('Set Countdown Timer'),
         backgroundColor: primaryColor,
       ),
       body: Center(
@@ -54,14 +54,14 @@ class _SetCountdownScreenState extends State<SetCountdownScreen> {
             if (selectedDateTime != null)
               Text(
                 'Selected End Time: ${selectedDateTime.toString()}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
-            SizedBox(height: 20),
-            ButtonWidget(text: "Select End Time", onClicked: (){
+            const SizedBox(height: 20),
+            ButtonWidget(text: "Select Competition Start Date", onClicked: (){
               _selectDateTime(context);
             }, width: 300.0, height: 50.0),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ButtonWidget(text: "Set Countdown",
                 onClicked: (){
                   if(selectedDateTime !=null){

@@ -14,175 +14,217 @@ import '../../constant.dart';
 import '../../provider/dancer/dancer_provider.dart';
 
 class CompJournalScreen extends StatelessWidget {
-   CompJournalScreen({super.key});
+  CompJournalScreen({super.key});
 
-  var dateController = TextEditingController();
+  final dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-   final arguments = Get.arguments as Map<String, dynamic>? ?? {};
-   final provider = Provider.of<UserProvider>(context,listen: false);
+    final arguments = Get.arguments as Map<String, dynamic>? ?? {};
+    final provider = Provider.of<UserProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: lightGrey,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              SimpleHeader(text: "Competition Journal"),
-              Container(
-               width: Get.width,
-                height: Get.width * 0.450,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: ImageLoaderWidget(imageUrl: provider.compJournal.toString(),),
-                ),
-              ),
-              const SizedBox(height: 20.0,),
-              Container(
-                color: Colors.white,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: gradientColor
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Date", size: 12.0,color: Colors.white,)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Competition", size: 12.0,color: Colors.white)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Dance", size: 12.0,color: Colors.white)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Adjudication",color: Colors.white, size: 12.0,maxLine: 1 ,)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Overall", color: Colors.white,size: 12.0)),
-                            Container(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(text: "Specialty Award",color: Colors.white, size: 12.0)),
-                          ],
-                        ),
-                      ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                const SimpleHeader(text: "Competition Journal"),
+                SizedBox(
+                  width: Get.width,
+                  height: Get.width * 0.450,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: ImageLoaderWidget(
+                      imageUrl: provider.compJournal.toString(),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: Consumer<DancerProvider>(
-                        builder: (context, productProvider, child) {
-                          return StreamBuilder<List<CompJournalModel>>(
-                            stream: productProvider.getCompJournal(dancerID: arguments['id'] ?? ""),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return Center(child: CircularProgressIndicator());
-                              }
-                              if (snapshot.hasError) {
-                                return Center(child: Text('Error: ${snapshot.error}'));
-                              }
-                              if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                                return Center(child: Text('No Comp Journal found'));
-                              }
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+                Consumer<DancerProvider>(
+                  builder: (context, productProvider, child) {
+                    return StreamBuilder<List<CompJournalModel>>(
+                      stream: productProvider.getCompJournal(
+                          dancerID: arguments['id'] ?? ""),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasError) {
+                          return Center(child: Text('Error: ${snapshot.error}'));
+                        }
+                        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          return const Center(
+                              child: Text('No Comp Journal found'));
+                        }
 
-                              List<CompJournalModel> compJournal = snapshot.data!;
-                              return ListView.builder(
-                                itemCount: compJournal.length,
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  CompJournalModel model = compJournal[index];
-                                  log("message${model.date}");
-                                  return  GestureDetector(
-                                    onTap: (){
-                                      showCustomDialog(onDelete: () async{
-                                        await CompJournalServices().deleteCompJournal(
-                                            id: model.id.toString(),
-                                            dancerID: model.dancerId.toString(),
-                                            context: context
-                                        );
-                                        Navigator.pop(context);
-                                      },
-                                          onDetails: (){},
-                                          isThird: false,
-                                          onEdit: (){
-                                            Navigator.pop(context);
-                                            Get.bottomSheet(CompBottomSheet(
-                                              id: model.id,
-                                              comp: model.comp,
-                                              dance: model.dance,
-                                              adjuction: model.adjuction,
-                                              overAll: model.overAll,
-                                              special: model.special,
-                                              date: model.date,
-                                              compID: model.id,
-                                              dancerID: model.dancerId,
-                                              type: 'edit',
-                                            ));
-                                          }
-                                      );
-
-                                    },
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: TextWidget(text: model.date, size: 12.0,color: Colors.black,)),
-                                        Container(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: TextWidget(text: model.comp, size: 12.0,color: Colors.black)),
-                                        Container(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: TextWidget(text: model.dance, size: 12.0,color: Colors.black)),
-                                        Container(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: TextWidget(text: model.adjuction,color: Colors.black, size: 12.0)),
-                                        Container(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: TextWidget(text: model.overAll, color: Colors.black,size: 12.0)),
-                                        Container(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: TextWidget(text: model.special,color: Colors.black, size: 12.0)),
-                                      ],
+                        List<CompJournalModel> compJournal = snapshot.data!;
+                        return ListView.builder(
+                          itemCount: compJournal.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            CompJournalModel model = compJournal[index];
+                            log("message${model.date}");
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                color: Colors.white,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        gradient: gradientColor,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          for (var label in [
+                                            "Date",
+                                            "Competition",
+                                            "Dance",
+                                            "Adjudication",
+                                            "Overall",
+                                            "Specialty Award"
+                                          ])
+                                            Container(
+                                              padding:
+                                              const EdgeInsets.all(5.0),
+                                              child: TextWidget(
+                                                text: label,
+                                                size: 12.0,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
                                     ),
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                                    Expanded(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          showCustomDialog(
+                                            onDelete: () async {
+                                              await CompJournalServices()
+                                                  .deleteCompJournal(
+                                                id: model.id.toString(),
+                                                dancerID: model.dancerId
+                                                    .toString(),
+                                                context: context,
+                                              );
+                                              Navigator.pop(context);
+                                            },
+                                            onDetails: () {},
+                                            isThird: false,
+                                            onEdit: () {
+                                              Navigator.pop(context);
+                                              Get.bottomSheet(CompBottomSheet(
+                                                id: model.id,
+                                                comp: model.comp,
+                                                dance: model.dance,
+                                                adjuction: model.adjuction,
+                                                overAll: model.overAll,
+                                                special: model.special,
+                                                date: model.date,
+                                                compID: model.id,
+                                                dancerID: model.dancerId,
+                                                type: 'edit',
+                                              ));
+                                            },
+                                          );
+                                        },
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              padding:
+                                              const EdgeInsets.all(5.0),
+                                              child: TextWidget(
+                                                text: model.date,
+                                                size: 12.0,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            Container(
+                                              padding:
+                                              const EdgeInsets.all(5.0),
+                                              child: TextWidget(
+                                                text: model.comp,
+                                                size: 12.0,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            Container(
+                                              padding:
+                                              const EdgeInsets.all(5.0),
+                                              child: TextWidget(
+                                                text: model.dance,
+                                                size: 12.0,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            Container(
+                                              padding:
+                                              const EdgeInsets.all(5.0),
+                                              child: TextWidget(
+                                                text: model.adjuction,
+                                                size: 12.0,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            Container(
+                                              padding:
+                                              const EdgeInsets.all(5.0),
+                                              child: TextWidget(
+                                                text: model.overAll,
+                                                size: 12.0,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            Container(
+                                              padding:
+                                              const EdgeInsets.all(5.0),
+                                              child: TextWidget(
+                                                text: model.special,
+                                                size: 12.0,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
                 ),
-              ),
-
-
-            ],
+              ],
+            ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.bottomSheet(CompBottomSheet(id: arguments['id'] ?? "null",));
+          Get.bottomSheet(CompBottomSheet(id: arguments['id'] ?? "null"));
         },
-        tooltip: 'Increment',
+        tooltip: 'Add Competition Journal',
         backgroundColor: primaryColor,
-        child: Icon(Icons.add,color: Colors.white,),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }
 }
-
-
-
-

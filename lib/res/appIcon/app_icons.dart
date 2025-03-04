@@ -12,4 +12,6 @@ class AppIcons{
   static const ic_web = "assets/icons/ic_web.png";
   static const ic_back = "assets/icons/ic_back.png";
   static const ic_upload = "assets/icons/ic_upload.png";
+  static const new_splash = "assets/icons/new_splash.png";
+  static const new_icon = "assets/icons/new_app_icon.png";
 }

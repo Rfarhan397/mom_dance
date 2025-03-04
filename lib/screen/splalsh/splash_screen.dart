@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mom_dance/provider/user/user_provider.dart';
+import 'package:mom_dance/res/appIcon/app_icons.dart';
 import 'package:mom_dance/routes/routes_name.dart';
 import 'package:mom_dance/screen/login/login_screen.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Image.asset(AppAssets.logo,width: Get.width / 1.5,),
+        child: Image.asset(AppIcons.new_splash,width: Get.width / 1.5,),
       ),
     );
   }

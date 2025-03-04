@@ -73,7 +73,7 @@ class AddDancerScreen extends StatelessWidget {
                   TextWidget(text: "Dancer Name", size: 14.0),
                   SizedBox(height: 10.0,),
                   CustomTextField(
-                      hintText: type == 'edit' ? nameController.text = dancer.name : "Enter dancer Name",
+                      hintText: type == 'edit' ? nameController.text = dancer.name : "enter dancer name",
                       controller: nameController
                   ),
                   SizedBox(height: 60.0,),

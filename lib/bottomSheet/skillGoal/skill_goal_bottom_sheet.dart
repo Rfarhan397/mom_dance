@@ -62,7 +62,7 @@ class SkillGoalBottomSheet extends StatelessWidget {
                     },
                     radius: 15.0,
                     hintText: provider.selectedDate == null ?
-                    type == "edit" ? dateController.text = date  : "Select Date" :
+                    type == "edit" ? dateController.text = date  : "select date" :
                     dateController.text = "${provider.selectedDate.day}/${provider.selectedDate.month}/${provider.selectedDate.year}",
                     controller: dateController
                 );

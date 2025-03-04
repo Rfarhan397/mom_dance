@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mom_dance/model/compPacking/comp_packing_model.dart';
@@ -23,7 +25,7 @@ class CompPackingBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
           gradient: gradientColor,
           borderRadius: const BorderRadius.only(
@@ -38,24 +40,20 @@ class CompPackingBottomSheet extends StatelessWidget {
           children: [
             TextWidget(text: "Add Competition Packing Item", size: 16.0,color: Colors.white,),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextWidget(text: "Item", size: 14.0,color: Colors.white,),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(hintText: type == "edit" ? nameController.text = name : "item", controller: nameController),
-
-
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
             SimpleButtonWidget(text: type == "edit" ? "Update" : "Add", onClicked: () async{
-
 
               final compPacking = CompPackingModel(
                   id: type == "edit" ? packID : autoID(),
                   name: nameController.text.toString().trim(),
                   userUID: auth.currentUser!.uid.toString(),
               );
-
               if(type == "edit"){
-                await FavouriteLinksServices().addCompPacking(compPacking, context);
+                await FavouriteLinksServices().updateCompPacking(compPacking, context);
               }else{
                 await Provider.of<PackingProvider>(context, listen: false)
                     .addCompPacking(compPacking);
@@ -65,7 +63,7 @@ class CompPackingBottomSheet extends StatelessWidget {
               nameController.text = "";
               Get.back();
             }, width: Get.width, height: 50.0),
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
           ],
         ),
       ),

@@ -40,7 +40,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
                mainAxisAlignment: MainAxisAlignment.spaceAround,
                children: [
                  CompJournalCard(
-                   image: AppAssets.comp_journal,
+                   image: AppAssets.comp_journal_new,
                    title: 'Competition Journal',
                    press: () {
                      log("Id: ${dancer.id}");
@@ -50,7 +50,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
                    },
                  ),
                  CompJournalCard(
-                   image: AppAssets.costume_checklist,
+                   image: AppAssets.costume_checklist_new,
                    title: 'Costume Checklist',
                    press: () {
                      log("Id: ${dancer.id}");
@@ -66,7 +66,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CompJournalCard(
-                    image: AppAssets.skill_goal,
+                    image: AppAssets.skill_goals,
                     title: 'Skill Goals',
                     press: () {
                       Get.toNamed(RoutesName.skillGoalScreen,arguments: {
@@ -75,7 +75,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
                     },
                   ),
                   CompJournalCard(
-                    image: AppAssets.costume_measurement,
+                    image: AppAssets.costume_measurement_new,
                     title: 'Costume Measurements',
                     press: () {
                       log("Id: ${dancer.id}");
@@ -92,7 +92,7 @@ class AddDancerDetailsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CompJournalCard(
-                    image: AppAssets.dance_shoes,
+                    image: AppAssets.dance_shoes_new,
                     title: 'Dance Shoes',
                     press: () {
                       log("Id: ${dancer.id}");

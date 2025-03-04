@@ -37,9 +37,9 @@ class MeasurementBottomSheet extends StatelessWidget {
             SizedBox(height: 20.0,),
 
             SizedBox(height: 20.0,),
-            TextWidget(text: "Details", size: 14.0,color: Colors.white,),
+            TextWidget(text: "Measurement", size: 14.0,color: Colors.white,),
             SizedBox(height: 10.0,),
-            CustomTextField(hintText: "add details", controller: detailsController),
+            CustomTextField(hintText: "add measurement", controller: detailsController),
 
             SizedBox(height: 40.0,),
             SimpleButtonWidget(text: "Add", onClicked: () async{

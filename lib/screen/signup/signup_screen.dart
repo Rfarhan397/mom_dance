@@ -182,7 +182,7 @@ class SignupScreen extends StatelessWidget {
 
                          }, width: Get.width, height: 50.0) :
                          ButtonLoadingWidget(
-                             loadingMesasge: "login",
+                             loadingMesasge: "Signing up",
                              width: MediaQuery.sizeOf(context).width,
                              height: 50.0
                          );
